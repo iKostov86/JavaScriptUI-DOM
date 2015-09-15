@@ -141,3 +141,71 @@ ctx.moveTo(580, 530);
 ctx.lineTo(660, 530);
 
 ctx.stroke();
+
+//house
+ctx.fillStyle = "#975B5B";
+ctx.strokeStyle = "black";
+
+//draw roof
+ctx.beginPath();
+ctx.moveTo(970, 380);
+ctx.lineTo(1205, 100);
+ctx.lineTo(1299, 212);
+ctx.lineTo(1346, 268);
+ctx.lineTo(1440, 380);
+ctx.fill();
+ctx.stroke();
+
+//draw chimney
+ctx.beginPath();
+ctx.moveTo(1299, 292);
+ctx.lineTo(1299, 152);
+ctx.lineTo(1346, 152);
+ctx.lineTo(1346, 292);
+ctx.save();
+ctx.fill();
+ctx.stroke();
+
+ctx.scale(1, 0.25);
+ctx.beginPath();
+ctx.arc(1323, 152 / 0.25, 23.5, 0, 2 * Math.PI);
+ctx.restore();
+ctx.fill();
+ctx.stroke();
+
+//draw base
+ctx.fillRect(970, 380, 470, 400);
+ctx.strokeRect(970, 380, 470, 400);
+
+//draw door
+ctx.beginPath();
+ctx.moveTo(1030, 780);
+ctx.lineTo(1030, 650);
+ctx.bezierCurveTo(1025, 580, 1175, 580, 1170, 650);
+ctx.moveTo(1100, 780);
+ctx.lineTo(1100, 600);
+ctx.moveTo(1170, 780);
+ctx.lineTo(1170, 650);
+ctx.moveTo(1088, 720);
+ctx.arc(1080, 720, 8, 0 , 2 * Math.PI);
+ctx.moveTo(1128, 720);
+ctx.arc(1120, 720, 8, 0, 2 * Math.PI);
+ctx.fill();
+ctx.stroke();
+
+//draw windows
+ctx.fillStyle = "black";
+ctx.fillRect(1000, 420, 80, 50);
+ctx.fillRect(1085, 420, 80, 50);
+ctx.fillRect(1000, 475, 80, 50);
+ctx.fillRect(1085, 475, 80, 50);
+
+ctx.fillRect(1245, 420, 80, 50);
+ctx.fillRect(1330, 420, 80, 50);
+ctx.fillRect(1245, 475, 80, 50);
+ctx.fillRect(1330, 475, 80, 50);
+
+ctx.fillRect(1245, 580, 80, 50);
+ctx.fillRect(1330, 580, 80, 50);
+ctx.fillRect(1245, 635, 80, 50);
+ctx.fillRect(1330, 635, 80, 50);
