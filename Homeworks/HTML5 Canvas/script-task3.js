@@ -43,8 +43,9 @@ if (!Array.prototype.fill) {
 
 (function () {
     const constants = {
-        SNAKE_SPEED: 150,
-        SNAKE_LEVEL: 10,
+        SNAKE_SPEED: 100,
+        SNAKE_GROW_SPEED: 10,
+        SNAKE_LEVEL_UP: 10,
         SNAKE_SIZES_X: 24,
         SNAKE_SIZES_Y: 24,
         SNAKE_SIZES_R: 16,
@@ -53,6 +54,7 @@ if (!Array.prototype.fill) {
         TEXT_FILL_STYLE: getRandomColor(),
         GAME_LOGO_TEXT: 'SNAKE GAME',
         GAME_OVER_TEXT: 'GAME OVER',
+        GAME_PAUSE_TEXT: 'PAUSE',
         GAME_LOGO_FONT: '88px Algerian',
         SCORE_FONT: '32px Algerian',
         GAME_OVER_FONT: '72px Algerian'
@@ -60,21 +62,22 @@ if (!Array.prototype.fill) {
 
     var canvas = document.getElementById('the-canvas'),
         ctx = canvas.getContext('2d'),
+        image = new Image(),
         snake = getSnake(),
         feed = getFeed(),
-        pause = false,
+        pause = true,
         isOver = false,
-        speed = constants.SNAKE_SPEED,
         keyState,
         timerId;
 
+    image.src = 'http://cartoon-animals.disneyandcartoons.com/_/rsrc/1365530108702/cartoon-snake-images/Snake-Clipart_9.png?height=400&width=400';
     document.onkeydown = checkKeyState;
-
     ctx.fillStyle = snake.color;
 
     function animation() {
         clearCanvas();
-        drawScore();
+        drawCanvasImage();
+        drawGameText();
         drawFeed();
         drawSnake();
         checkBoundaries();
@@ -82,8 +85,8 @@ if (!Array.prototype.fill) {
         checkFeed();
         checkDirection();
 
-        if (!isOver) {
-            timerId = setTimeout(animation, speed);
+        if (!isOver && !pause) {
+            timerId = setTimeout(animation, snake.current.speed);
         }
         //requestAnimationFrame(animation);
     }
@@ -91,7 +94,7 @@ if (!Array.prototype.fill) {
     function moveSnake() {
         var i;
 
-        for (i = 0; i < snake.length; i += 1) {
+        for (i = 0; i < snake.current.length; i += 1) {
             switch (snake.current.directions[i]) {
                 case 'right':
                     snake.current.w[i] = snake.current.w[i] + snake.sizes.r * 2;
@@ -111,74 +114,68 @@ if (!Array.prototype.fill) {
 
     function checkDirection() {
         var i,
-            oldDirection,
+            direction,
             newDirection = snake.current.directions[0];
 
-        for (i = 1; i < snake.length; i += 1) {
+        for (i = 1; i < snake.current.length; i += 1) {
             if (snake.current.directions[i] !== newDirection) {
-                oldDirection = newDirection;
+                direction = newDirection;
                 newDirection = snake.current.directions[i];
-                snake.current.directions[i] = oldDirection;
+                snake.current.directions[i] = direction;
             }
         }
     }
 
     function checkBoundaries() {
-        var i;
-
-        for (i = 0; i < snake.length; i += 1) {
-            if (snake.current.w[i] > canvas.width - snake.sizes.r ||
-            snake.current.h[i] > canvas.height - snake.sizes.r ||
-            snake.current.w[i] < snake.sizes.r ||
-            snake.current.h[i] < snake.sizes.r) {
-                drawScore();
-                drawGameOver();
-                break;
-            }
+        if (snake.current.w[0] > canvas.width - snake.sizes.r ||
+        snake.current.h[0] > canvas.height - snake.sizes.r ||
+        snake.current.w[0] < snake.sizes.r ||
+        snake.current.h[0] < snake.sizes.r) {
+            drawGameText();
+            drawGameOver();
         }
     }
 
     function checkFeed() {
-        var i;
+        if (snake.current.w[0] - snake.sizes.r <= feed.x && feed.x <= snake.current.w[0] + snake.sizes.r &&
+            snake.current.h[0] - snake.sizes.r <= feed.y && feed.y <= snake.current.h[0] + snake.sizes.r) {
+            snake.current.score += 1;
+            growSnake();
 
-        for (i = 0; i < snake.length; i += 1) {
-            if (snake.current.w[i] - snake.sizes.r <= feed.x && feed.x <= snake.current.w[i] + snake.sizes.r &&
-            snake.current.h[i] - snake.sizes.r <= feed.y && feed.y <= snake.current.h[i] + snake.sizes.r) {
-                feed = getFeed();
-                snake.current.score += 1;
-                if (snake.current.score === constants.SNAKE_LEVEL) {
-                    snake = getSnake();
-                    speed = speed - constants.SNAKE_LEVEL;
-                }
-                growSnake();
-                break;
+            if (snake.current.score === constants.SNAKE_LEVEL_UP * snake.current.level) {
+                snake.current.level += 1;
+                getLevel();
             }
+
+            feed = getFeed();
         }
     }
 
     function checkKeyState(e) {
-        switch (e.keyCode) {
-            case 37:
-                keyState = 'left';
-                break;
-            case 38:
-                keyState = 'up';
-                break;
-            case 39:
-                keyState = 'right';
-                break;
-            case 40:
-                keyState = 'down';
-                break;
-            case 27:
-                if (pause) {
-                    setTimeout(animation, speed);
-                    pause = false;
-                } else {
+        if (pause) {
+            if (e.keyCode === 27) {
+                setTimeout(animation, snake.current.speed);
+                pause = false;
+            }
+        } else {
+            switch (e.keyCode) {
+                case 37:
+                    keyState = 'left';
+                    break;
+                case 38:
+                    keyState = 'up';
+                    break;
+                case 39:
+                    keyState = 'right';
+                    break;
+                case 40:
+                    keyState = 'down';
+                    break;
+                case 27:
                     clearTimeout(timerId);
                     pause = true;
-                }
-                break;
+                    break;
+            }
         }
 
         if (typeof keyState !== 'undefined' && keyState !== snake.current.directions[0]) {
@@ -186,11 +183,15 @@ if (!Array.prototype.fill) {
         }
     }
 
+    function drawCanvasImage() {
+        ctx.drawImage(image, 2 * canvas.width / 3, 150);
+    }
+
     function drawSnake() {
         var i;
 
         ctx.fillStyle = snake.color;
-        for (i = 0; i < snake.length; i += 1) {
+        for (i = 0; i < snake.current.length; i += 1) {
             ctx.beginPath();
             ctx.arc(snake.current.w[i], snake.current.h[i], snake.sizes.r, 0, 2 * Math.PI);
             ctx.fill();
@@ -212,12 +213,16 @@ if (!Array.prototype.fill) {
         ctx.fillStyle = snake.color;
     }
 
-    function drawScore() {
+    function drawGameText() {
         ctx.font = constants.SCORE_FONT;
         ctx.fillStyle = constants.TEXT_FILL_STYLE;
         ctx.fillText(snake.current.score + ' pts', 100, 50);
+
+        ctx.fillText(snake.current.level + ' lvl', 250, 50);
+
         ctx.fillText('Esc => pause / resume', 100, canvas.height - 100);
-        ctx.fillText('F5 => start game', 100, canvas.height - 50);
+        ctx.fillText('F5 => start new game', 100, canvas.height - 50);
+
         ctx.font = constants.GAME_LOGO_FONT;
         ctx.fillText(constants.GAME_LOGO_TEXT, 2 * canvas.width / 3, 100);
     }
@@ -234,90 +239,103 @@ if (!Array.prototype.fill) {
     }
 
     function growSnake() {
-        switch (snake.current.directions[snake.length - 1]) {
+        switch (snake.current.directions[snake.current.length - 1]) {
             case 'right':
-                snake.current.w[snake.length] = snake.current.w[snake.length - 1] - snake.sizes.r * 2;
-                snake.current.h[snake.length] = snake.current.h[snake.length - 1];
+                snake.current.w[snake.current.length] = snake.current.w[snake.current.length - 1] - snake.sizes.r * 2;
+                snake.current.h[snake.current.length] = snake.current.h[snake.current.length - 1];
                 break;
             case 'left':
-                snake.current.w[snake.length] = snake.current.w[snake.length - 1] + snake.sizes.r * 2;
-                snake.current.h[snake.length] = snake.current.h[snake.length - 1];
+                snake.current.w[snake.current.length] = snake.current.w[snake.current.length - 1] + snake.sizes.r * 2;
+                snake.current.h[snake.current.length] = snake.current.h[snake.current.length - 1];
                 break;
             case 'up':
-                snake.current.w[snake.length] = snake.current.w[snake.length - 1];
-                snake.current.h[snake.length] = snake.current.h[snake.length - 1] + snake.sizes.r * 2;
+                snake.current.w[snake.current.length] = snake.current.w[snake.current.length - 1];
+                snake.current.h[snake.current.length] = snake.current.h[snake.current.length - 1] + snake.sizes.r * 2;
                 break;
             case 'down':
-                snake.current.w[snake.length] = snake.current.w[snake.length - 1];
-                snake.current.h[snake.length] = snake.current.h[snake.length - 1] - snake.sizes.r * 2;
+                snake.current.w[snake.current.length] = snake.current.w[snake.current.length - 1];
+                snake.current.h[snake.current.length] = snake.current.h[snake.current.length - 1] - snake.sizes.r * 2;
                 break;
         }
 
-        snake.current.directions[snake.length] = snake.current.directions[snake.length - 1];
-        snake.length += 1;
+        snake.current.directions[snake.current.length] = snake.current.directions[snake.current.length - 1];
+        snake.current.length += 1;
     }
 
-    function growLevel() {
+    function getLevel() {
+        var e = {};
+        e.keyCode = 27;
+        checkKeyState(e);
+
+        snake.current.length = snake.length;
+        snake.current.speed = snake.current.speed - snake.current.level * constants.SNAKE_GROW_SPEED;
+        snake.current.w = snake.current.w.slice(0, snake.length);
+        snake.current.h = snake.current.h.slice(0, snake.length);
+        snake.current.directions = snake.current.directions.slice(0, snake.length);
     }
 
     function getSnake() {
         var i,
-            snake = {};
+            newSnake = {};
 
-        snake.color = getRandomColor();
-        snake.direction = getRandomDirection();
-        snake.length = getRandomNumber(1, 5);
-        snake.start = {
-            x: getRandomNumber(constants.SNAKE_SIZES_R * snake.length * 2,
-                canvas.width - constants.SNAKE_SIZES_R * snake.length * 2),
-            y: getRandomNumber(constants.SNAKE_SIZES_R * snake.length * 2,
-                canvas.height - constants.SNAKE_SIZES_R * snake.length * 2)
+        newSnake.color = getRandomColor();
+        newSnake.direction = getRandomDirection();
+        newSnake.length = getRandomNumber(1, 5),
+        newSnake.start = {
+            x: getRandomNumber(constants.SNAKE_SIZES_R * newSnake.length * 2,
+                canvas.width - constants.SNAKE_SIZES_R * newSnake.length * 2),
+            y: getRandomNumber(constants.SNAKE_SIZES_R * newSnake.length * 2,
+                canvas.height - constants.SNAKE_SIZES_R * newSnake.length * 2)
         };
-        snake.sizes = {
+        newSnake.sizes = {
             x: constants.SNAKE_SIZES_X,
             y: constants.SNAKE_SIZES_Y,
             r: constants.SNAKE_SIZES_R
         };
-        snake.current = {
-            w: new Array(snake.length),
-            h: new Array(snake.length),
-            directions: new Array(snake.length),
-            score: 0
+
+        newSnake.current = {
+            score: 0,
+            level: 1,
+            length: newSnake.length,
+            speed: constants.SNAKE_SPEED,
+            w: new Array(newSnake.length),
+            h: new Array(newSnake.length),
+            directions: new Array(newSnake.length)
         };
 
-        snake.current.w[0] = snake.start.x;
-        snake.current.h[0] = snake.start.y;
+        newSnake.current.w[0] = newSnake.start.x;
+        newSnake.current.h[0] = newSnake.start.y;
 
-        switch (snake.direction) {
+        switch (newSnake.direction) {
             case 'right':
-                for (i = 1; i < snake.length; i += 1) {
-                    snake.current.w[i] = snake.current.w[i - 1] - snake.sizes.r * 2;
-                    snake.current.h[i] = snake.current.h[i - 1];
+                for (i = 1; i < newSnake.length; i += 1) {
+                    newSnake.current.w[i] = newSnake.current.w[i - 1] - newSnake.sizes.r * 2;
+                    newSnake.current.h[i] = newSnake.current.h[i - 1];
                 }
                 break;
             case 'left':
-                for (i = 1; i < snake.length; i += 1) {
-                    snake.current.w[i] = snake.current.w[i - 1] + snake.sizes.r * 2;
-                    snake.current.h[i] = snake.current.h[i - 1];
+                for (i = 1; i < newSnake.length; i += 1) {
+                    newSnake.current.w[i] = newSnake.current.w[i - 1] + newSnake.sizes.r * 2;
+                    newSnake.current.h[i] = newSnake.current.h[i - 1];
                 }
                 break;
             case 'up':
-                for (i = 1; i < snake.length; i += 1) {
-                    snake.current.w[i] = snake.current.w[i - 1];
-                    snake.current.h[i] = snake.current.h[i - 1] + snake.sizes.r * 2;
+                for (i = 1; i < newSnake.length; i += 1) {
+                    newSnake.current.w[i] = newSnake.current.w[i - 1];
+                    newSnake.current.h[i] = newSnake.current.h[i - 1] + newSnake.sizes.r * 2;
                 }
                 break;
             case 'down':
-                for (i = 1; i < snake.length; i += 1) {
-                    snake.current.w[i] = snake.current.w[i - 1];
-                    snake.current.h[i] = snake.current.h[i - 1] - snake.sizes.r * 2;
+                for (i = 1; i < newSnake.length; i += 1) {
+                    newSnake.current.w[i] = newSnake.current.w[i - 1];
+                    newSnake.current.h[i] = newSnake.current.h[i - 1] - newSnake.sizes.r * 2;
                 }
                 break;
         }
 
-        snake.current.directions.fill(snake.direction);
+        newSnake.current.directions.fill(newSnake.direction);
 
-        return snake;
+        return newSnake;
     }
 
     function getFeed() {
