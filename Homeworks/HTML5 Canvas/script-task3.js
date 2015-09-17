@@ -65,7 +65,7 @@ if (!Array.prototype.fill) {
         image = new Image(),
         snake = getSnake(),
         feed = getFeed(),
-        pause = true,
+        pause = false,
         isOver = false,
         keyState,
         timerId;
@@ -86,9 +86,10 @@ if (!Array.prototype.fill) {
         checkDirection();
 
         if (!isOver && !pause) {
-            timerId = setTimeout(animation, snake.current.speed);
+            timerId = setTimeout(function() {
+                requestAnimationFrame(animation);
+            }, snake.current.speed);
         }
-        //requestAnimationFrame(animation);
     }
 
     function moveSnake() {
@@ -154,7 +155,10 @@ if (!Array.prototype.fill) {
     function checkKeyState(e) {
         if (pause) {
             if (e.keyCode === 27) {
-                setTimeout(animation, snake.current.speed);
+                timerId = setTimeout(function () {
+                   requestAnimationFrame(animation);
+                }, snake.current.speed);
+
                 pause = false;
             }
         } else {
