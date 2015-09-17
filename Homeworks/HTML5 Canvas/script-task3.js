@@ -48,8 +48,11 @@ if (!Array.prototype.fill) {
         SNAKE_SIZES_R: 16,
         FEED_SIZES_R: 16,
         FEED_FILL_STYLE: getRandomColor(),
-        SCORE_FONT: '36px Arial',
-        GAME_OVER_FONT: '72px Arial'
+        GAME_LOGO_TEXT: 'SNAKE GAME',
+        GAME_OVER_TEXT: 'GAME OVER',
+        GAME_LOGO_FONT: '88px Algerian',
+        SCORE_FONT: '32px Algerian',
+        GAME_OVER_FONT: '72px Algerian'
     };
 
     var canvas = document.getElementById('the-canvas'),
@@ -124,8 +127,8 @@ if (!Array.prototype.fill) {
             snake.current.h[i] > canvas.height - snake.sizes.r ||
             snake.current.w[i] < snake.sizes.r ||
             snake.current.h[i] < snake.sizes.r) {
-                drawGameOver();
                 drawScore();
+                drawGameOver();
                 break;
             }
         }
@@ -170,7 +173,7 @@ if (!Array.prototype.fill) {
                 break;
         }
 
-        if (typeof keyState !== 'undefined') {
+        if (typeof keyState !== 'undefined' && keyState !== snake.current.directions[0]) {
             snake.current.directions[0] = keyState;
         }
     }
@@ -178,19 +181,17 @@ if (!Array.prototype.fill) {
     function drawSnake() {
         var i;
 
-        ctx.beginPath();
         for (i = 0; i < snake.length; i += 1) {
-            moveTo(snake.current.w[i], snake.current.h[i]);
+            ctx.beginPath();
             ctx.arc(snake.current.w[i], snake.current.h[i], snake.sizes.r, 0, 2 * Math.PI);
+            ctx.fill();
         }
-        ctx.fill();
 
         ctx.fillStyle = getRandomColor();
         ctx.beginPath();
-        ctx.moveTo(snake.current.w[0], snake.current.h[0]);
-        ctx.arc(snake.current.w[0], snake.current.h[0], snake.sizes.r / 2, 0, 2 * Math.PI);
+        ctx.arc(snake.current.w[0] - snake.sizes.r / 2, snake.current.h[0], snake.sizes.r / 2, 0, 2 * Math.PI);
+        ctx.arc(snake.current.w[0] + snake.sizes.r / 2, snake.current.h[0], snake.sizes.r / 2, 0, 2 * Math.PI);
         ctx.fill();
-
         ctx.fillStyle = snake.color;
     }
 
@@ -204,11 +205,15 @@ if (!Array.prototype.fill) {
 
     function drawScore() {
         ctx.font = constants.SCORE_FONT;
-        ctx.fillText(snake.current.score + 'pts', 100, 50);
+        ctx.fillText(snake.current.score + ' pts', 100, 50);
+        ctx.fillText('Esc => pause / resume', 100, canvas.height - 100);
+        ctx.fillText('F5 => start game', 100, canvas.height - 50);
+        ctx.font = constants.GAME_LOGO_FONT;
+        ctx.fillText(constants.GAME_LOGO_TEXT, 2 * canvas.width / 3, 100);
     }
 
     function drawGameOver() {
-        var text = 'GAME OVER!',
+        var text = constants.GAME_OVER_TEXT,
             x = (canvas.width - (text.length * constants.GAME_OVER_FONT.split('px')[0] / 2)) / 2,
             y = canvas.height / 2;
 
