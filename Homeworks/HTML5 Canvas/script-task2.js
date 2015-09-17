@@ -3,9 +3,9 @@ var module = (function() {
         ctx = canvas.getContext('2d'),
         constants = {
             CONST_RADIUS: 100,
-            CONST_PIXELS: 10,
+            CONST_MOVES: 10,
             CONST_REPEATS: 30,
-            CONST_BALLS: 35
+            CONST_BALLS: 55
         },
         balls = getBalls();
 
@@ -40,15 +40,15 @@ var module = (function() {
 
     function moveBall(ball) {
         if (ball.direction.right) {
-            ball.current.x += ball.movePixels;
+            ball.current.x += ball.move.x;
         } else {
-            ball.current.x -= ball.movePixels;
+            ball.current.x -= ball.move.x;
         }
 
         if (ball.direction.down) {
-            ball.current.y += ball.movePixels;
+            ball.current.y += ball.move.y;
         } else {
-            ball.current.y -= ball.movePixels;
+            ball.current.y -= ball.move.y;
         }
     }
 
@@ -99,12 +99,15 @@ var module = (function() {
     function getBall() {
         var ball = {
             radius: getRandomNumber(1, constants.CONST_RADIUS),
-            movePixels: getRandomNumber(1, constants.CONST_PIXELS),
             color: getRandomColor(),
             start: {
                 x: getRandomNumber(0, canvas.width),
                 y: getRandomNumber(0, canvas.height),
                 countRepeats: getRandomNumber(1, constants.CONST_REPEATS),
+            },
+            move: {
+                x: getRandomNumber(1, constants.CONST_MOVES),
+                y: getRandomNumber(1, constants.CONST_MOVES)
             },
             direction: {
                 right: getRandomDirection(),
@@ -121,7 +124,7 @@ var module = (function() {
         return ball;
     }
 
-    function getRandomNumber(max, min) {
+    function getRandomNumber(min, max) {
         return Math.floor(Math.random() * (max - min)) + min;
     }
 
