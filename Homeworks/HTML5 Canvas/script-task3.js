@@ -69,6 +69,7 @@ if (!Array.prototype.fill) {
         isOver = false,
         keyState,
         timerId;
+        //requestId;
 
     image.src = 'http://cartoon-animals.disneyandcartoons.com/_/rsrc/1365530108702/cartoon-snake-images/Snake-Clipart_9.png?height=400&width=400';
     document.onkeydown = checkKeyState;
@@ -89,6 +90,7 @@ if (!Array.prototype.fill) {
             timerId = setTimeout(function() {
                 requestAnimationFrame(animation);
             }, snake.current.speed);
+            //requestId = requestAnimationFrame(animation);
         }
     }
 
@@ -158,7 +160,7 @@ if (!Array.prototype.fill) {
                 timerId = setTimeout(function () {
                    requestAnimationFrame(animation);
                 }, snake.current.speed);
-
+                //requestId = requestAnimationFrame(animation);
                 pause = false;
             }
         } else {
@@ -177,6 +179,7 @@ if (!Array.prototype.fill) {
                     break;
                 case 27:
                     clearTimeout(timerId);
+                    //cancelAnimationFrame(requestId);
                     pause = true;
                     break;
             }
