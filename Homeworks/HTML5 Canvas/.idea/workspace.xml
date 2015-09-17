@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ba0b4d77-dd0a-4af7-b28d-2566de488f27" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script-task3.js" afterPath="$PROJECT_DIR$/script-task3.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/style.css" afterPath="$PROJECT_DIR$/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="HTML5 Canvas.iws" />
@@ -75,21 +74,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index-task3.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index-task3.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index-task3.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.2">
-              <caret line="8" column="63" selection-start-line="8" selection-start-column="63" selection-end-line="8" selection-end-column="63" />
+            <state vertical-scroll-proportion="0.29843563">
+              <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="script-task3.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="script-task3.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/script-task3.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.26980484">
-              <caret line="207" column="45" selection-start-line="207" selection-start-column="45" selection-end-line="207" selection-end-column="45" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="154" column="13" selection-start-line="154" selection-start-column="13" selection-end-line="154" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -117,9 +116,9 @@
         <option value="$PROJECT_DIR$/index-task1.html" />
         <option value="$PROJECT_DIR$/index-task2.html" />
         <option value="$PROJECT_DIR$/script-task2.js" />
-        <option value="$PROJECT_DIR$/index-task3.html" />
         <option value="$PROJECT_DIR$/style.css" />
         <option value="$PROJECT_DIR$/script-task3.js" />
+        <option value="$PROJECT_DIR$/index-task3.html" />
       </list>
     </option>
   </component>
@@ -292,7 +291,13 @@
       <option name="project" value="LOCAL" />
       <updated>1442452140071</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="canvas homework task task3 version 2 is done">
+      <created>1442455481195</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1442455481195</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -336,7 +341,8 @@
     <MESSAGE value="canvas homework task 1 is done" />
     <MESSAGE value="canvas homework task 2 is done" />
     <MESSAGE value="canvas homework task task3 version 1 is done" />
-    <option name="LAST_COMMIT_MESSAGE" value="canvas homework task task3 version 1 is done" />
+    <MESSAGE value="canvas homework task task3 version 2 is done" />
+    <option name="LAST_COMMIT_MESSAGE" value="canvas homework task task3 version 2 is done" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -513,14 +519,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index-task3.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.2">
-          <caret line="8" column="63" selection-start-line="8" selection-start-column="63" selection-end-line="8" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -531,8 +529,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/script-task3.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26980484">
-          <caret line="207" column="45" selection-start-line="207" selection-start-column="45" selection-end-line="207" selection-end-column="45" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="154" column="13" selection-start-line="154" selection-start-column="13" selection-end-line="154" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index-task3.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29843563">
+          <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
           <folding />
         </state>
       </provider>

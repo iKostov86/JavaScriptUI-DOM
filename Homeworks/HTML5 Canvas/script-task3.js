@@ -43,11 +43,14 @@ if (!Array.prototype.fill) {
 
 (function () {
     const constants = {
+        SNAKE_SPEED: 150,
+        SNAKE_LEVEL: 10,
         SNAKE_SIZES_X: 24,
         SNAKE_SIZES_Y: 24,
         SNAKE_SIZES_R: 16,
         FEED_SIZES_R: 16,
         FEED_FILL_STYLE: getRandomColor(),
+        TEXT_FILL_STYLE: getRandomColor(),
         GAME_LOGO_TEXT: 'SNAKE GAME',
         GAME_OVER_TEXT: 'GAME OVER',
         GAME_LOGO_FONT: '88px Algerian',
@@ -61,6 +64,7 @@ if (!Array.prototype.fill) {
         feed = getFeed(),
         pause = false,
         isOver = false,
+        speed = constants.SNAKE_SPEED,
         keyState,
         timerId;
 
@@ -79,7 +83,7 @@ if (!Array.prototype.fill) {
         checkDirection();
 
         if (!isOver) {
-            timerId = setTimeout(animation, 150);
+            timerId = setTimeout(animation, speed);
         }
         //requestAnimationFrame(animation);
     }
@@ -142,6 +146,10 @@ if (!Array.prototype.fill) {
             snake.current.h[i] - snake.sizes.r <= feed.y && feed.y <= snake.current.h[i] + snake.sizes.r) {
                 feed = getFeed();
                 snake.current.score += 1;
+                if (snake.current.score === constants.SNAKE_LEVEL) {
+                    snake = getSnake();
+                    speed = speed - constants.SNAKE_LEVEL;
+                }
                 growSnake();
                 break;
             }
@@ -164,7 +172,7 @@ if (!Array.prototype.fill) {
                 break;
             case 27:
                 if (pause) {
-                    setTimeout(animation, 150);
+                    setTimeout(animation, speed);
                     pause = false;
                 } else {
                     clearTimeout(timerId);
@@ -181,6 +189,7 @@ if (!Array.prototype.fill) {
     function drawSnake() {
         var i;
 
+        ctx.fillStyle = snake.color;
         for (i = 0; i < snake.length; i += 1) {
             ctx.beginPath();
             ctx.arc(snake.current.w[i], snake.current.h[i], snake.sizes.r, 0, 2 * Math.PI);
@@ -205,6 +214,7 @@ if (!Array.prototype.fill) {
 
     function drawScore() {
         ctx.font = constants.SCORE_FONT;
+        ctx.fillStyle = constants.TEXT_FILL_STYLE;
         ctx.fillText(snake.current.score + ' pts', 100, 50);
         ctx.fillText('Esc => pause / resume', 100, canvas.height - 100);
         ctx.fillText('F5 => start game', 100, canvas.height - 50);
@@ -218,6 +228,7 @@ if (!Array.prototype.fill) {
             y = canvas.height / 2;
 
         ctx.font = constants.GAME_OVER_FONT;
+        ctx.fillStyle = constants.TEXT_FILL_STYLE;
         ctx.fillText(text, x, y);
         isOver = true;
     }
@@ -244,6 +255,9 @@ if (!Array.prototype.fill) {
 
         snake.current.directions[snake.length] = snake.current.directions[snake.length - 1];
         snake.length += 1;
+    }
+
+    function growLevel() {
     }
 
     function getSnake() {
