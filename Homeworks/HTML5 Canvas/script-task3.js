@@ -68,8 +68,8 @@ if (!Array.prototype.fill) {
         timerId;
     //requestId;
 
-    canvas.width = window.innerWidth - 10;
-    canvas.height = window.innerHeight - 50;
+    canvas.width = window.innerWidth - window.innerWidth * 0.01;
+    canvas.height = window.innerHeight - window.innerHeight * 0.07;
 
     newGame.addEventListener("click", play);
     image.src = 'http://cartoon-animals.disneyandcartoons.com/_/rsrc/1365530108702/cartoon-snake-images/Snake-Clipart_9.png?height=400&width=400';
