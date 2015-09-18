@@ -68,8 +68,8 @@ if (!Array.prototype.fill) {
         timerId;
     //requestId;
 
-    canvas.width = innerWidth - 10;
-    canvas.height = innerHeight - 50;
+    canvas.width = window.innerWidth - 10;
+    canvas.height = window.innerHeight - 50;
 
     newGame.addEventListener("click", play);
     image.src = 'http://cartoon-animals.disneyandcartoons.com/_/rsrc/1365530108702/cartoon-snake-images/Snake-Clipart_9.png?height=400&width=400';
@@ -242,7 +242,8 @@ if (!Array.prototype.fill) {
             ctx.fillText('F5 => refresh canvas', 100, canvas.height - 50);
 
             ctx.font = constants.GAME_LOGO_FONT;
-            ctx.fillText(constants.GAME_LOGO_TEXT, 2 * canvas.width / 3, 100);
+            ctx.fillText(constants.GAME_LOGO_TEXT,
+                canvas.width - constants.GAME_LOGO_TEXT.length * constants.GAME_OVER_FONT.split('px')[0], 100);
         }
 
         function drawGameOver() {
