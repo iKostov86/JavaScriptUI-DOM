@@ -45,7 +45,7 @@ if (!Array.prototype.fill) {
     const constants = {
         SNAKE_SPEED: 100,
         SNAKE_GROW_SPEED: 10,
-        SNAKE_LEVEL_UP: 10,
+        SNAKE_LEVEL_UP: 55,
         SNAKE_SIZES_X: 24,
         SNAKE_SIZES_Y: 24,
         SNAKE_SIZES_R: 16,
@@ -57,7 +57,9 @@ if (!Array.prototype.fill) {
         GAME_PAUSE_TEXT: 'PAUSE',
         GAME_LOGO_FONT: '88px Algerian',
         SCORE_FONT: '32px Algerian',
-        GAME_OVER_FONT: '72px Algerian'
+        GAME_OVER_FONT: '72px Algerian',
+        CANVAS_WIDTH: window.innerWidth * 0.995,
+        CANVAS_HEIGHT: window.innerHeight * 0.930
     };
 
     var newGame = document.getElementById('new-game'),
@@ -68,11 +70,10 @@ if (!Array.prototype.fill) {
         timerId;
     //requestId;
 
-    canvas.width = window.innerWidth - window.innerWidth * 0.01;
-    canvas.height = window.innerHeight - window.innerHeight * 0.07;
+    canvas.width = constants.CANVAS_WIDTH;
+    canvas.height = constants.CANVAS_HEIGHT;
 
     newGame.addEventListener("click", play);
-    image.src = 'http://cartoon-animals.disneyandcartoons.com/_/rsrc/1365530108702/cartoon-snake-images/Snake-Clipart_9.png?height=400&width=400';
 
     function play() {
         var snake = getSnake(),
@@ -83,6 +84,7 @@ if (!Array.prototype.fill) {
 
         document.onkeydown = updateKeyState;
         clearGame.addEventListener("click", stop);
+        image.src = 'http://cartoon-animals.disneyandcartoons.com/_/rsrc/1365530108702/cartoon-snake-images/Snake-Clipart_9.png?height=400&width=400';
 
         if (typeof timerId !== 'undefined') {
             clearInterval(timerId);
@@ -97,8 +99,8 @@ if (!Array.prototype.fill) {
             drawFeed();
             drawSnake();
             checkBoundaries();
-            updateMove();
             checkIfFeedEaten();
+            updateMove();
             updateDirection();
 
             if (!isOver && !pause) {
@@ -246,6 +248,14 @@ if (!Array.prototype.fill) {
                 canvas.width - constants.GAME_LOGO_TEXT.length * constants.GAME_OVER_FONT.split('px')[0], 100);
         }
 
+        function drawCanvasImage(side) {
+            if (side === 'left') {
+                ctx.drawImage(image, canvas.width * 0.65, canvas.height * 0.2, image.width, image.height);
+            } else {
+                ctx.drawImage(image, canvas.width * 0.65, canvas.height * 0.2, image.width, image.height);
+            }
+        }
+
         function drawGameOver() {
             var text = constants.GAME_OVER_TEXT,
                 x = (canvas.width - (text.length * constants.GAME_OVER_FONT.split('px')[0] / 2)) / 2,
@@ -255,6 +265,7 @@ if (!Array.prototype.fill) {
             ctx.fillStyle = constants.TEXT_FILL_STYLE;
             ctx.fillText(text, x, y);
             isOver = true;
+            stop();
         }
 
         function growSnake() {
@@ -287,7 +298,7 @@ if (!Array.prototype.fill) {
             updateKeyState(e);
 
             snake.current.length = snake.length;
-            snake.current.speed = snake.current.speed - snake.current.level * constants.SNAKE_GROW_SPEED;
+            snake.current.speed = snake.current.speed - constants.SNAKE_GROW_SPEED;
             snake.current.w = snake.current.w.slice(0, snake.length);
             snake.current.h = snake.current.h.slice(0, snake.length);
             snake.current.directions = snake.current.directions.slice(0, snake.length);
@@ -368,7 +379,10 @@ if (!Array.prototype.fill) {
         }
 
         function stop() {
-            clearCanvas();
+            if (!isOver) {
+                clearCanvas();
+            }
+
             if (typeof timerId !== 'undefined') {
                 clearInterval(timerId);
             }
@@ -376,10 +390,6 @@ if (!Array.prototype.fill) {
         }
 
         return animation();
-    }
-
-    function drawCanvasImage() {
-        ctx.drawImage(image, 2 * canvas.width / 3, 150);
     }
 
     function getRandomNumber(min, max) {
