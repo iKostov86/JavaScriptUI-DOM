@@ -1,24 +1,132 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>Demo-KineticJS</title>
     <style>
-        html, body {
+        html, body, div {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
-        }
-        canvas {
-            /*background: lightslategray !important;*/
-            /*border: 3px solid red !important;*/
+            overflow: hidden;
         }
     </style>
     <script type="text/javascript" src="bower_components/KineticJS/kinetic.js"></script>
 </head>
 <body>
-<div id="kinetic-container"></div>
-<script type="text/javascript" src="script.js"></script>
+    <div id="kinetic-container"></div>
+    <!--<script type="text/javascript" src="script.js"></script>-->
+    <script>
+        (function () {
+            var i,
+                a = 0.001,
+                speed,
+                times = [],
+                constants = {
+                    IMAGE_SIZE: 75,
+                    IMAGE_SOURCE: 'http://www.familyfuntwincities.com/wp-content/uploads/2013/09/apple_red_1_clipart.png',
+                    TIME_INITIAL_VALUE: 1,
+                    SET_TIMEOUT_VALUE: 100
+                };
+
+            var stage = new Kinetic.Stage({
+                container: 'kinetic-container',
+                width: window.innerWidth * 1,
+                height: window.innerHeight * 1
+            });
+
+            var layer1 = new Kinetic.Layer();
+            var layer2 = new Kinetic.Layer();
+
+            stage.add(layer2);
+            stage.add(layer1);
+
+            function animation() {
+                var count = 0;
+                layer1.find('Image')
+                    .forEach(function (item, index) {
+                        speed = a * times[index] * times[index];
+
+                        if (item.getY() >= (stage.getHeight() - item.getHeight())) {
+                            layer2.add(item);
+                            layer2.draw();
+                            times.splice(index, 1);
+                        } else {
+                            item.setY(item.getY() + speed);
+                        }
+
+                        times[index] += 1;
+                        count += 1;
+                    });
+
+
+                console.log(count);
+                requestAnimationFrame(animation);
+                layer1.draw();
+            }
+
+            function fire() {
+
+            }
+
+            function getApple() {
+                var img = new Image();
+                img.src = constants.IMAGE_SOURCE;
+
+                var image = new Kinetic.Image({
+                    x: getRandomNumber(0, stage.getWidth() - constants.IMAGE_SIZE + 1),
+                    y: getRandomNumber(0, stage.getHeight() - constants.IMAGE_SIZE + 1),
+                    width: constants.IMAGE_SIZE,
+                    height: constants.IMAGE_SIZE,
+                    image: img
+                });
+
+                times.push(constants.TIME_INITIAL_VALUE);
+                layer1.add(image);
+
+                setTimeout(getApple, constants.SET_TIMEOUT_VALUE);
+            }
+
+            function getRect () {
+                layer2.add(new Kinetic.Rect({
+                    x: 0,
+                    y: 0,
+                    width: stage.getWidth(),
+                    height: stage.getHeight(),
+                    fill: 'gray',
+                    stroke: 'green',
+                    strokeWidth: 10
+                }));
+
+                layer2.draw();
+            }
+
+            function getContra() {
+                var img = new Image();
+                img.src = 'http://orig01.deviantart.net/1fe4/f/2013/298/7/3/the_second_rise_of_colonel_bahamut_chapter_1_by_tall3shyguy-d6rr16i.png';
+
+                var image = new Kinetic.Image({
+                    x: 10,
+                    y: stage.getHeight() / 2 - constants.IMAGE_SIZE,
+                    width: constants.IMAGE_SIZE * 2,
+                    height: constants.IMAGE_SIZE * 2,
+                    image: img
+                });
+
+                layer2.add(image);
+            }
+
+            function getRandomNumber(min, max) {
+                return Math.floor(Math.random() * (max - min)) + min;
+            }
+
+            getRect();
+            getContra();
+            getApple();
+
+            return animation();
+        }());
+    </script>
 </body>
 </html>

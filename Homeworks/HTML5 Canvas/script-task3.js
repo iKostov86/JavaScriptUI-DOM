@@ -67,6 +67,7 @@ if (!Array.prototype.fill) {
         canvas = document.getElementById('the-canvas'),
         ctx = canvas.getContext('2d'),
         image = new Image(),
+        feedImg = new Image(),
         timerId;
     //requestId;
 
@@ -85,6 +86,7 @@ if (!Array.prototype.fill) {
         document.onkeydown = updateKeyState;
         clearGame.addEventListener("click", stop);
         image.src = 'http://cartoon-animals.disneyandcartoons.com/_/rsrc/1365530108702/cartoon-snake-images/Snake-Clipart_9.png?height=400&width=400';
+        feedImg.src = 'http://www.capitalotc.com/wp-content/uploads/2014/11/apple-might-remove-google-search-engine.png';
 
         if (typeof timerId !== 'undefined') {
             clearInterval(timerId);
@@ -193,8 +195,20 @@ if (!Array.prototype.fill) {
         }
 
         function checkIfFeedEaten() {
-            if (snake.current.w[0] - snake.sizes.r <= feed.x && feed.x <= snake.current.w[0] + snake.sizes.r &&
-                snake.current.h[0] - snake.sizes.r <= feed.y && feed.y <= snake.current.h[0] + snake.sizes.r) {
+            //if (snake.current.w[0] - snake.sizes.r <= feed.x && feed.x <= snake.current.w[0] + snake.sizes.r &&
+            //    snake.current.h[0] - snake.sizes.r <= feed.y && feed.y <= snake.current.h[0] + snake.sizes.r) {
+            //    growSnake();
+            //
+            //    if (snake.current.score === constants.SNAKE_LEVEL_UP * snake.current.level) {
+            //        snake.current.level += 1;
+            //        getLevel();
+            //    }
+            //
+            //    feed = getFeed();
+            //}
+
+            if (snake.current.w[0] - snake.sizes.r <= feed.x + feed.r * 2 && feed.x + feed.r * 2 <= snake.current.w[0] + snake.sizes.r &&
+                snake.current.h[0] - snake.sizes.r <= feed.y + feed.r * 2 && feed.y + feed.r * 2 <= snake.current.h[0] + snake.sizes.r) {
                 snake.current.score += 1;
                 growSnake();
 
@@ -226,11 +240,13 @@ if (!Array.prototype.fill) {
         }
 
         function drawFeed() {
-            ctx.fillStyle = constants.FEED_FILL_STYLE;
-            ctx.beginPath();
-            ctx.arc(feed.x, feed.y, feed.r, 0, 2 * Math.PI);
-            ctx.fill();
-            ctx.fillStyle = snake.color;
+            //ctx.fillStyle = constants.FEED_FILL_STYLE;
+            //ctx.beginPath();
+            //ctx.arc(feed.x, feed.y, feed.r, 0, 2 * Math.PI);
+            //ctx.fill();
+            //ctx.fillStyle = snake.color;
+
+            ctx.drawImage(feedImg, feed.x, feed.y, feed.r * 4, feed.r * 4);
         }
 
         function drawGameText() {

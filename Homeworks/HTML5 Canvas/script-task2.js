@@ -5,10 +5,12 @@ var module = (function() {
             CONST_RADIUS: 100,
             CONST_MOVES: 10,
             CONST_REPEATS: 30,
-            CONST_BALLS: 55
+            CONST_BALLS: 36
         },
         balls = getBalls();
 
+    canvas.width = window.innerWidth * 0.995;
+    canvas.height = window.innerHeight * 0.99;
 
     function animationAllBalls() {
         //var balls = getBalls();
@@ -20,6 +22,7 @@ var module = (function() {
         for (i = 0; i < balls.length; i += 1) {
             moveBall(balls[i]);
             checkBoundaries(balls[i]);
+            //checkIfCrash(balls[i]);
             drawBall(balls[i]);
         }
 
@@ -67,6 +70,43 @@ var module = (function() {
         } else if (ball.current.y <= ball.radius) {
             ball.current.y = ball.radius;
             ball.direction.down = true;
+        }
+    }
+
+    function checkIfCrash(ball) {
+        var d,
+            i,
+            length,
+            temp;
+
+        for (i = 0, length = balls.length; i < length; i += 1) {
+            if (ball !== balls[i]) {
+                d = Math.sqrt((ball.current.x - balls[i].current.x) * (ball.current.x - balls[i].current.x)
+                    + (ball.current.y - balls[i].current.y) * (ball.current.y - balls[i].current.y));
+
+                if (d <= ball.radius + balls[i].radius) {
+                    if (ball.direction.right === balls[i].direction.right &&
+                        ball.direction.down === balls[i].direction.down) {
+                        temp = ball.move.x;
+                        ball.move.x = ball.move.y;
+                        ball.move.y = temp;
+
+                        temp = balls[i].move.x;
+                        balls[i].move.x = balls[i].move.y;
+                        balls[i].move.y = temp;
+                    }
+
+                    if (ball.direction.right !== balls[i].direction.right) {
+                        ball.direction.right = !ball.direction.right;
+                        balls[i].direction.right = !balls[i].direction.right;
+                    }
+
+                    if (ball.direction.down !== balls[i].direction.down) {
+                        ball.direction.down = !ball.direction.down;
+                        balls[i].direction.down = !balls[i].direction.down;
+                    }
+                }
+            }
         }
     }
 
