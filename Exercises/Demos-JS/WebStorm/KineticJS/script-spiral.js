@@ -14,23 +14,23 @@
     layer = new Kinetic.Layer();
 
     constants = {
-        BALLS: 25,
+        BALLS: 1,
         BALL_X_INITIAL: 0,
         BALL_Y_INITIAL: 500,
         BALL_MIN_RADIUS: 15,
         BALL_MAX_RADIUS: 75,
         BALL_MIN_ANGLE: 0,
         BALL_MAX_ANGLE: 2 * Math.PI,
-        BALL_MIN_SPEED: 0.001,
-        BALL_MAX_SPEED: 0.01,
+        BALL_MIN_SPEED: Math.PI * 0.01,
+        BALL_MAX_SPEED: Math.PI * 0.1,
         BALL_FILL: getRandomColor(),
         BALL_STROKE: getRandomColor(),
         PATH_X_INITIAL: stage.getWidth() / 2,
         PATH_Y_INITIAL: stage.getHeight() / 2,
-        PATH_RADIUS_INITIAL: 300,
-        PATH_MOVE_X: 0.001,
-        PATH_MOVE_Y: 0.001,
-        PATH_MOVE_RADIUS: 0.001,
+        PATH_RADIUS_INITIAL: 50,
+        PATH_MOVE_X: 0.1,
+        PATH_MOVE_Y: 0.1,
+        PATH_MOVE_RADIUS: 0.2,
         PATH_STROKE: 'black',
         PATH_STROKE_WIDTH: 15
     };
@@ -47,9 +47,11 @@
                 }
 
                 moveBall(ball, path);
+                moveCopy(ball);
                 movePath(path);
             });
 
+        layerOrbit.draw();
         layer.draw();
 
         //setTimeout(step, 100);
@@ -100,11 +102,21 @@
     }
 
     function movePath(path) {
-        path.setX(path.getX() + constants.PATH_MOVE_X);
-        path.setY(path.getY() + constants.PATH_MOVE_Y);
+        path.setX(path.getX() - constants.PATH_MOVE_X);
+        path.setY(path.getY() - constants.PATH_MOVE_Y);
         path.setRadius(path.getRadius() + constants.PATH_MOVE_RADIUS);
+    }
 
-        layerOrbit.draw();
+    function moveCopy(ball) {
+        var newBall = new Kinetic.Circle({
+            x: ball.getX(),
+            y: ball.getY(),
+            radius: ball.getRadius(),
+            fill: ball.getFill(),
+            stroke: ball.getStroke()
+        });
+
+        layerOrbit.add(newBall);
     }
 
     function getRandomNumber(min, max) {
@@ -118,7 +130,6 @@
 
         var letters = HEXADECIMAL_SIGNS.split('');
         var color = '#';
-
         for (var i = 0; i < COLOR_STRING_LENGTH; i += 1) {
             color += letters[Math.floor(Math.random() * HEXADECIMAL_BASE)];
         }
