@@ -15,44 +15,56 @@
 
     constants = {
         BALLS: 1,
-        BALL_X_INITIAL: 0,
-        BALL_Y_INITIAL: 0,
-        BALL_RADIUS_INITIAL: 25,
-        BALL_DELTA_X: 1,
-        BALL_DELTA_Y: 1,
-        BALL_SPEED_X: 3,
-        BALL_SPEED_Y: 7,
-        BALL_ACCELERATION: 0.01,
-        BALL_DECELERATION: 0.01,
-        BALL_TIME: 1
+        BALL_MIN_X: 0,
+        BALL_MAX_X:stage.getWidth(),
+        BALL_MIN_Y: 0,
+        BALL_MAX_Y:stage.getHeight(),
+        BALL_MIN_RADIUS: 15,
+        BALL_MAX_RADIUS: 45,
+        BALL_MIN_MOVE_X: 2,
+        BALL_MAX_MOVE_X: 6,
+        BALL_MIN_MOVE_Y: 4,
+        BALL_MAX_MOVE_Y: 8,
+        BALL_MIN_ACCELERATION: 0.11,
+        BALL_MAX_ACCELERATION: 0.99,
+        BALL_MIN_DECELERATION_DIFFERENCE: 0.01,
+        BALL_MAX_DECELERATION_DIFFERENCE: 0.02
     };
 
+    function start() {
+        getBalls();
+        step();
+    }
+
     function step() {
-        layer.find('Circle')
-            .forEach(function (ball) {
-                if (ball.deltaX === 1 && ball.getX() >= stage.getWidth() - ball.getRadius()) {
-                    ball.deltaX = -1;
-                } else if (ball.deltaX === -1 && ball.getX() <= 0 + ball.getRadius()) {
-                    ball.deltaX = 1;
-                }
+        var balls = layer.find('Circle');
 
-                if (ball.deltaY === 1 && ball.getY() >= stage.getHeight() - ball.getRadius()) {
+        balls.forEach(function (ball) {
+            if (ball.deltaX === 1 && ball.getX() >= stage.getWidth() - ball.getRadius()) {
+                ball.deltaX = -1;
+            } else if (ball.deltaX === -1 && ball.getX() <= 0 + ball.getRadius()) {
+                ball.deltaX = 1;
+            }
+
+            if (ball.deltaY === 1) {
+                if (ball.getY() >= stage.getHeight() - ball.getRadius()) {
                     ball.deltaY = -1;
-                    ball.time = constants.BALL_TIME;
-                } else if (ball.deltaY === -1 && (ball.getY() <= 0 + ball.getRadius() || ball.speed <= 0)) {
-                    ball.deltaY = 1;
-                    ball.time = constants.BALL_TIME;
                 }
-
-                if (ball.getY() >= stage.getHeight() - ball.getRadius() && ball.speed <= 0) {
+            } else {
+                if (ball.getY() <= 0 + ball.getRadius()) {
+                    ball.deltaY = 1;
+                } else if (ball.getY() >= stage.getHeight() - ball.getRadius() && ball.speedY <= 0) {
                     ball.setY(stage.getHeight() - ball.getRadius());
                     layerBG.add(ball);
                     layerBG.draw();
-                } else {
-                    moveBall(ball);
-                    ball.time += 1;
+                } else if (ball.speedY <= 0) {
+                    ball.deltaY = 1;
+                    ball.speedY = 0;
                 }
-            });
+            }
+
+            moveBall(ball);
+        });
 
         layer.draw();
 
@@ -68,31 +80,41 @@
 
     function getBall() {
         var ball = new Kinetic.Circle({
-            x: constants.BALL_X_INITIAL,
-            y: constants.BALL_Y_INITIAL,
-            radius: constants.BALL_RADIUS_INITIAL,
+            x: getRandomNumber(constants.BALL_MIN_X, constants.BALL_MAX_X),
+            y: getRandomNumber(constants.BALL_MIN_Y, constants.BALL_MAX_Y),
+            radius: getRandomNumber(constants.BALL_MIN_RADIUS, constants.BALL_MAX_RADIUS),
             fill: getRandomColor(),
-            stroke: getRandomColor()
+            //stroke: getRandomColor()
         });
 
-        ball.deltaX = constants.BALL_DELTA_X;
-        ball.deltaY = constants.BALL_DELTA_Y;
-        ball.speedX = constants.BALL_SPEED_X;
-        ball.speedY = constants.BALL_SPEED_Y;
-        ball.time = constants.BALL_TIME;
+        ball.deltaX = getRandomDirection();
+        ball.deltaY = getRandomDirection();
+        ball.speedX = getRandomNumber(constants.BALL_MIN_MOVE_X, constants.BALL_MAX_MOVE_X);
+        ball.speedY = getRandomNumber(constants.BALL_MIN_MOVE_Y, constants.BALL_MAX_MOVE_Y);
+        ball.acceleration = getRandomNumber(constants.BALL_MIN_ACCELERATION, constants.BALL_MAX_ACCELERATION);
+        ball.deceleration = ball.acceleration +
+            getRandomNumber(constants.BALL_MIN_DECELERATION_DIFFERENCE,constants.BALL_MAX_DECELERATION_DIFFERENCE);
 
         return ball;
     }
 
     function moveBall(ball) {
         if (ball.deltaY === 1) {
-            ball.speedY += constants.BALL_ACCELERATION * ball.time;
+            ball.speedY += ball.acceleration;
         } else {
-            ball.speedY -= constants.BALL_DECELERATION * ball.time;
+            ball.speedY -= ball.deceleration;
         }
 
         ball.setX(ball.getX() + ball.deltaX * ball.speedX);
         ball.setY(ball.getY() + ball.deltaY * ball.speedY);
+    }
+
+    function getRandomDirection() {
+        return getRandomNumber(0, 1) > 0.5 ? 1 : -1;
+    }
+
+    function getRandomNumber(min, max) {
+        return Math.random() * (max - min) + min;
     }
 
     function getRandomColor() {
@@ -111,7 +133,5 @@
     stage.add(layerBG);
     stage.add(layer);
 
-    getBalls();
-
-    return step();
+    return start();
 }());
