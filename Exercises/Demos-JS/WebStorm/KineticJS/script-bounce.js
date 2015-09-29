@@ -31,6 +31,11 @@
         BALL_MAX_DECELERATION_DIFFERENCE: 0.02
     };
 
+     window.onkeydown = function(ev){
+       if(ev.keyCode === 32){
+       }
+     };
+
     function start() {
         getBalls();
         step();
