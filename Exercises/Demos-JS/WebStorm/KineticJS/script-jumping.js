@@ -232,7 +232,7 @@
                 kineticImage;
 
             canvasImage = new Image();
-            canvasImage.src = constants.IMAGES_SOURCES[2];
+            canvasImage.src = constants.IMAGES_SOURCES[3];
 
             canvasImage.onload = function () {
                 kineticImage = new Kinetic.Image({
