@@ -43,7 +43,7 @@ if (!Array.prototype.fill) {
 
 (function () {
     const constants = {
-        SNAKE_SPEED: 100,
+        SNAKE_SPEED: 150,
         SNAKE_GROW_SPEED: 10,
         SNAKE_LEVEL_UP: 55,
         SNAKE_SIZES_X: 24,
@@ -195,21 +195,8 @@ if (!Array.prototype.fill) {
         }
 
         function checkIfFeedEaten() {
-            //if (snake.current.w[0] - snake.sizes.r <= feed.x && feed.x <= snake.current.w[0] + snake.sizes.r &&
-            //    snake.current.h[0] - snake.sizes.r <= feed.y && feed.y <= snake.current.h[0] + snake.sizes.r) {
-            //    growSnake();
-            //
-            //    if (snake.current.score === constants.SNAKE_LEVEL_UP * snake.current.level) {
-            //        snake.current.level += 1;
-            //        getLevel();
-            //    }
-            //
-            //    feed = getFeed();
-            //}
-
-            if (snake.current.w[0] - snake.sizes.r <= feed.x + feed.r * 2 && feed.x + feed.r * 2 <= snake.current.w[0] + snake.sizes.r &&
-                snake.current.h[0] - snake.sizes.r <= feed.y + feed.r * 2 && feed.y + feed.r * 2 <= snake.current.h[0] + snake.sizes.r) {
-                snake.current.score += 1;
+            if (snake.current.w[0] - snake.sizes.r <= feed.x && feed.x <= snake.current.w[0] + snake.sizes.r &&
+                snake.current.h[0] - snake.sizes.r <= feed.y && feed.y <= snake.current.h[0] + snake.sizes.r) {
                 growSnake();
 
                 if (snake.current.score === constants.SNAKE_LEVEL_UP * snake.current.level) {
@@ -219,6 +206,19 @@ if (!Array.prototype.fill) {
 
                 feed = getFeed();
             }
+
+            //if (snake.current.w[0] - snake.sizes.r <= feed.x + feed.r * 4 && feed.x + feed.r * 4 <= snake.current.w[0] + snake.sizes.r &&
+            //    snake.current.h[0] - snake.sizes.r <= feed.y + feed.r * 4 && feed.y + feed.r * 4 <= snake.current.h[0] + snake.sizes.r) {
+            //    snake.current.score += 1;
+            //    growSnake();
+            //
+            //    if (snake.current.score === constants.SNAKE_LEVEL_UP * snake.current.level) {
+            //        snake.current.level += 1;
+            //        getLevel();
+            //    }
+            //
+            //    feed = getFeed();
+            //}
         }
 
         function drawSnake() {
@@ -240,13 +240,13 @@ if (!Array.prototype.fill) {
         }
 
         function drawFeed() {
-            //ctx.fillStyle = constants.FEED_FILL_STYLE;
-            //ctx.beginPath();
-            //ctx.arc(feed.x, feed.y, feed.r, 0, 2 * Math.PI);
-            //ctx.fill();
-            //ctx.fillStyle = snake.color;
+            ctx.fillStyle = constants.FEED_FILL_STYLE;
+            ctx.beginPath();
+            ctx.arc(feed.x, feed.y, feed.r, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.fillStyle = snake.color;
 
-            ctx.drawImage(feedImg, feed.x, feed.y, feed.r * 4, feed.r * 4);
+            //ctx.drawImage(feedImg, feed.x, feed.y, feed.r * 4, feed.r * 4);
         }
 
         function drawGameText() {
@@ -385,13 +385,13 @@ if (!Array.prototype.fill) {
         }
 
         function getFeed() {
-            var feed = {
-                x: getRandomNumber(constants.SNAKE_SIZES_R * 2, canvas.width - constants.SNAKE_SIZES_R * 2),
-                y: getRandomNumber(constants.SNAKE_SIZES_R * 2, canvas.height - constants.SNAKE_SIZES_R * 2),
+            var newFeed = {
+                x: getRandomNumber(constants.FEED_SIZES_R * 2, canvas.width - constants.FEED_SIZES_R * 2),
+                y: getRandomNumber(constants.FEED_SIZES_R * 2, canvas.height - constants.FEED_SIZES_R * 2),
                 r: constants.FEED_SIZES_R
             };
 
-            return feed;
+            return newFeed;
         }
 
         function stop() {
