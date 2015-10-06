@@ -58,8 +58,8 @@ if (!Array.prototype.fill) {
         GAME_LOGO_FONT: '88px Algerian',
         SCORE_FONT: '32px Algerian',
         GAME_OVER_FONT: '72px Algerian',
-        CANVAS_WIDTH: window.innerWidth * 0.995,
-        CANVAS_HEIGHT: window.innerHeight * 0.930
+        CANVAS_WIDTH: document.body.clientWidth,
+        CANVAS_HEIGHT: document.body.clientHeight
     };
 
     var newGame = document.getElementById('new-game'),
