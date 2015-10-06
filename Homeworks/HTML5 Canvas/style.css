@@ -9,8 +9,11 @@ html, body {
 }
 
 #the-canvas {
+    box-sizing: border-box;
     border: 5px solid blue;
     background-color: black;
+    width: 100%;
+    height: 90%;
 }
 
 #new-game, #clear-game {

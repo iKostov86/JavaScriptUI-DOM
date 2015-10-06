@@ -1,21 +1,11 @@
 var container = document.getElementById('svg-container'),
-    svg  = getSvg(window.innerWidth - 20, window.innerHeight - 20),
+    svg  = document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
     svgNS = svg.namespaceURI,
-    rect = getRect(10, 10, 200, 200);
+    rect = getRect(10, 10, 100, 100);
 
 svg.appendChild(rect);
 container.appendChild(svg);
 //document.body.appendChild(svg);
-
-function getSvg(w, h) {
-    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-
-    svg.setAttribute('width', w + '');
-    svg.setAttribute('height', h + '');
-    //svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
-
-    return svg;
-}
 
 function getRect(x, y, w, h) {
     var rect = document.createElementNS(svgNS, 'rect');
@@ -38,8 +28,10 @@ function getRect(x, y, w, h) {
 function animation() {
     var currentX = +rect.getAttribute('x'),
         currentY = +rect.getAttribute('y'),
-        svgWidth = +svg.getAttribute('width'),
-        svgHeight = +svg.getAttribute('height');
+        svgWidth = container.clientWidth,
+        svgHeight = container.clientHeight;
+        //svgWidth = +svg.getAttribute('width'),
+        //svgHeight = +svg.getAttribute('height');
 
     if (currentX >= svgWidth) {
         rect.directionX = -1;
