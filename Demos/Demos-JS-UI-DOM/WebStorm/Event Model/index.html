@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo-Event-Model</title>
+</head>
+<body>
+    <button id="button1" onclick="clickButton()">
+        Click me!
+    </button>
+    <div id="container1">
+        <button id="button2">
+            Click me!
+        </button>
+        <span id="text-container1">
+            TEXT
+        </span>
+    </div>
+    <div id="container2">
+        <button>
+            Click me!
+        </button>
+        <button>
+            Click me!
+        </button>
+        <span id="text-container2">TEXT</span>
+    </div>
+    <div id="container3">
+        <button id="button3">
+            Click me!
+        </button>
+        <span id="text-container3">
+            TEXT
+        </span>
+    </div>
+    <label for="input1">
+        Input 1
+    </label>
+    <input id="input1" type="text" onkeydown="inputChanged()" />
+    <label for="input2">
+        Input 2
+    </label>
+    <input id="input2" />
+    <label for="input3">
+        Input 3
+    </label>
+    <input id="input3" />
+    <span id="text-input">
+        TEXT
+    </span>
+    <script>
+        var i,
+            b,
+            bc,
+            input2,
+            input3,
+            button2,
+            container1,
+            container2;
+
+        i = 0;
+        b = 0;
+        bc = 0;
+
+        input2 = document.getElementById('input2');
+        input2.onkeydown = inputChanged;
+
+        input3 = document.getElementById('input3');
+        input3.addEventListener('keydown', inputChanged, false);
+
+        function clickContainer() {
+            console.log('You are clicked container.');
+        }
+
+        function clickButton(ev) {
+            if (ev.target.tagName.toLowerCase() !== 'button') {
+                return;
+            }
+
+            var text = document.getElementById('text-container1');
+
+            text.innerHTML = 'You are clicked button ' + ++bc + ' times.';
+        }
+
+        function clickContainerButton(ev) {
+            if (ev.target.tagName.toLowerCase() !== 'button') {
+                return;
+            }
+
+            var text = document.getElementById('text-container2');
+
+            text.innerHTML = 'You are clicked button ' + ++b + ' times.';
+        }
+
+        function inputChanged() {
+            var text = document.getElementById('text-input');
+
+            text.innerHTML = 'You are changed input ' + ++i + ' times.';
+        }
+
+        container1 = document.getElementById('container1');
+        container1.addEventListener('click', clickContainer, false);
+
+        button2 = document.getElementById('button2');
+        button2.addEventListener('click', clickButton, false);
+
+        container2 = document.getElementById('container2');
+        container2.addEventListener('click', clickContainerButton, false);
+    </script>
+    <script>
+        function attachEventHandler(element, eventType, eventHandler) {
+            if (!element) {
+                return;
+            }
+
+            if (document.addEventListener) {
+                element.addEventListener(eventType, eventHandler, true);
+            } else if (document.attachEvent) {
+                element.attachEvent('on' + eventType, eventHandler);
+            } else {
+                element['on' + eventType] = eventHandler;
+            }
+        }
+
+        var tripleClickEvent = new CustomEvent('tripleClick');
+
+        var button3 = document.getElementById('button3');
+
+        var count = 0;
+
+        button3.addEventListener('click', function() {
+            count++;
+
+            if (count === 3) {
+                count = 0;
+
+                button3.dispatchEvent(tripleClickEvent);
+            }
+
+            setTimeout(function() {
+                var text = document.getElementById('text-container3');
+
+                text.innerHTML = 'TEXT';
+                count = 0;
+            }, 750);
+        }, false);
+
+        button3.addEventListener('tripleClick', function () {
+            var text = document.getElementById('text-container3');
+
+            text.innerHTML = 'You are triple clicked button.';
+        }, false);
+    </script>
+</body>
+</html>
