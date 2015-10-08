@@ -20,5 +20,36 @@ Create a function that takes an id or DOM element and an array of contents
 module.exports = function () {
 
   return function (element, contents) {
+      if (typeof element === 'undefined') {
+          throw Error;
+      } else if (typeof element === 'string') {
+          element = document.getElementById(element);
+          if (!element) {
+              throw Error;
+          }
+      } else if (!(element instanceof HTMLElement) && element !== null) {
+          throw Error;
+      }
+
+      if (typeof contents === 'undefined') {
+          throw Error;
+      }
+
+      if (contents.some(function (item) {
+              return typeof item !== 'string' && typeof item !== 'number';
+          })) {
+          throw Error;
+      }
+
+      element.innerHTML = '';
+
+      var div  = document.createElement('div');
+
+      for (var i = 0, length = contents.length; i < length; i += 1) {
+          div = div.cloneNode(true);
+          div.innerHTML = contents[i];
+
+          element.appendChild(div);
+      }
   };
 };
