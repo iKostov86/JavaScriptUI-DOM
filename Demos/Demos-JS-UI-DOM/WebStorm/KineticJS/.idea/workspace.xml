@@ -2,40 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="31e7e37d-3639-4972-be39-840c89b2c047" name="Default" comment="">
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\VisualStudio\KineticJS\KineticJS.sln" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\VisualStudio\KineticJS\KineticJS\KineticJS.csproj" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\VisualStudio\KineticJS\KineticJS\Properties\AssemblyInfo.cs" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\VisualStudio\KineticJS\KineticJS\Web.Debug.config" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\VisualStudio\KineticJS\KineticJS\Web.Release.config" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\VisualStudio\KineticJS\KineticJS\Web.config" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\VisualStudio\KineticJS\KineticJS\index.html" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\VisualStudio\KineticJS\KineticJS\script.js" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\WebStorm\KineticJS\.idea\.name" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\WebStorm\KineticJS\.idea\KineticJS.iml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\WebStorm\KineticJS\.idea\codeStyleSettings.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\WebStorm\KineticJS\.idea\misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\WebStorm\KineticJS\.idea\modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\WebStorm\KineticJS\.idea\vcs.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\WebStorm\KineticJS\.idea\workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\WebStorm\KineticJS\index.html" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\WebStorm\KineticJS\script-bounce.js" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\WebStorm\KineticJS\script-falling-apple.js" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\WebStorm\KineticJS\script-jumping.js" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\WebStorm\KineticJS\script-kinetic.js" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\WebStorm\KineticJS\script-math-shapes.js" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\WebStorm\KineticJS\script-motion.js" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\WebStorm\KineticJS\script-spiral.js" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\WebStorm\KineticJS\script-trash.js" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\WebStorm\SVG\.idea\.name" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\WebStorm\SVG\.idea\SVG.iml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\WebStorm\SVG\.idea\misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\WebStorm\SVG\.idea\modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\WebStorm\SVG\.idea\vcs.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\WebStorm\SVG\.idea\workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\WebStorm\SVG\index-with-svg.html" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\WebStorm\SVG\index-without-svg.html" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\WebStorm\SVG\script-create-svg.js" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\Ivo\Documents\Git\JavaScriptUI-DOM\Exercises\Demos-JS\WebStorm\SVG\script-resize-svg.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../Homeworks/DOM Operations/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../../../Homeworks/DOM Operations/.idea/workspace.xml" />
     </list>
     <ignored path="KineticJS.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -56,11 +24,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -116,11 +84,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="script-motion.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="script-motion.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script-motion.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="29" column="30" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.22591743">
+              <caret line="99" column="5" selection-start-line="99" selection-start-column="5" selection-end-line="99" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -189,8 +157,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="744" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -221,7 +189,7 @@
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="FullScreen" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../DOM" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.HTML" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
@@ -328,7 +296,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973656" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -724,14 +692,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/script-motion.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="30" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/script-kinetic.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -775,7 +735,15 @@
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script-motion.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22591743">
+          <caret line="99" column="5" selection-start-line="99" selection-start-column="5" selection-end-line="99" selection-end-column="5" />
           <folding />
         </state>
       </provider>

@@ -14,21 +14,19 @@
 
         #root {
             box-sizing: border-box;
-            background: gray;
+            background: url("https://i.imgur.com/vR8w3xT.jpg");
+            background-size: 100% 100%;
             border: 5px solid black;
         }
-
-        /*#the-canvas {*/
-            /*background: gray;*/
-            /*width: 100%;*/
-            /*height: 100%;*/
-        /*}*/
     </style>
 </head>
 <body>
     <div id="root"></div>
     <script>
-        var constants = {};
+        var constants = {
+            ELLIPSE_RADIUS_X: 350,
+            ELLIPSE_RADIUS_Y: 350
+        };
 
         function createDivs(count) {
             var root = document.getElementById('root'),
@@ -48,27 +46,13 @@
                 div.style.position = 'absolute';
                 div.style.left = getRandomNumber(5, window.innerWidth - div.getAttribute('width') - div.getAttribute('borderWidth')) + 'px';
                 div.style.top = getRandomNumber(5, window.innerHeight - div.getAttribute('height') - div.getAttribute('borderWidth')) + 'px';
-                div.appendChild(strong.cloneNode(true));
 
+                div.appendChild(strong.cloneNode(true));
                 root.appendChild(div);
             }
         }
 
         function movesDivs(count) {
-//            var root = document.getElementById('root'),
-//                canvas = document.createElement('canvas'),
-//                ctx = canvas.getContext('2d');
-//
-//            canvas.id = 'the-canvas';
-//            canvas.width = root.clientWidth;
-//            canvas.height = root.clientHeight;
-//
-//            ctx.beginPath();
-//            ctx.arc(canvas.width / 2, canvas.height / 2, 100, 0, 2 * Math.PI);
-////            ctx.stroke();
-//
-//            root.appendChild(canvas);
-
             var div = document.createElement('div'),
                 angle = 0;
 
@@ -89,8 +73,8 @@
                 }
 
                 for (var i = 0; i < count; i += 1) {
-                    div.style.left = document.body.clientWidth / 2 + 350 * Math.cos(angle + 2 * Math.PI / count * i) + 'px';
-                    div.style.top = document.body.clientHeight / 2 + 350 * Math.sin(angle + 2 * Math.PI / count * i) + 'px';
+                    div.style.left = document.body.clientWidth / 2 + constants.ELLIPSE_RADIUS_X * Math.cos(angle + 2 * Math.PI / count * i) + 'px';
+                    div.style.top = document.body.clientHeight / 2 + constants.ELLIPSE_RADIUS_Y * Math.sin(angle + 2 * Math.PI / count * i) + 'px';
 
                     docFrag.appendChild(div.cloneNode(true));
                 }
@@ -103,18 +87,23 @@
                     angle = 0;
                 }
 
-                setTimeout(animation, getRandomNumber(25, 125));
-                //requestAnimationFrame(animation);
+//                setTimeout(animation, getRandomNumber(5, 55));
+                requestAnimationFrame(animation);
             }
 
-            function changeBackground() {
+            function changeAttributes() {
+                constants.ELLIPSE_RADIUS_X = getRandomNumber(150, 450);
+                constants.ELLIPSE_RADIUS_Y = getRandomNumber(150, 450);
+
+                div.style.width = getRandomNumber(45, 75) + 'px';
+                div.style.height = getRandomNumber(45, 75) + 'px';
                 div.style.background = getRandomColor();
 
-                setTimeout(changeBackground, getRandomNumber(500, 1500));
+                setTimeout(changeAttributes, getRandomNumber(500, 1500));
             }
 
             animation();
-            changeBackground();
+            changeAttributes();
         }
 
         function getRandomNumber(min, max) {
@@ -135,7 +124,7 @@
         }
 
         //createDivs(5);
-        movesDivs(20);
+        movesDivs(100);
     </script>
 </body>
 </html>
