@@ -1,6 +1,7 @@
 var root = document.createElement('div'),
     div = document.createElement('div'),
-    cardsSource = 'cardTheme2.png';
+    //cardsSource = 'cardTheme2.png';
+    cardsSource = 'http://belote.vbet.com/newBlot/cards/cardTheme2.png';
 
 root.id = 'root';
 
