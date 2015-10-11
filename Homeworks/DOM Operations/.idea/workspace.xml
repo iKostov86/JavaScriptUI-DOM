@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3ecc25a2-952a-49de-a3d3-84defcf4ec34" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Demos/Demos-JS-UI-DOM/WebStorm/DOM/script-belot-cards.js" afterPath="$PROJECT_DIR$/../../Demos/Demos-JS-UI-DOM/WebStorm/DOM/script-belot-cards.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Demos/Demos-JS-UI-DOM/WebStorm/Canvas/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../Demos/Demos-JS-UI-DOM/WebStorm/Canvas/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="3ecc25a2-952a-49de-a3d3-84defcf4ec34" name="Default" comment="" />
     <ignored path="DOM Operations.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
