@@ -1,6 +1,5 @@
 (function (number) {
-    var root = document.getElementById('root'),
-        rootStyle = window.getComputedStyle(root),
+    var rootStyle = window.getComputedStyle(root),
         strong = document.createElement('strong');
 
     strong.innerHTML = 'div';

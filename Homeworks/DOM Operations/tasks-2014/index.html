@@ -9,12 +9,11 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
+            overflow: auto;
         }
 
         #root {
             box-sizing: border-box;
-            background-size: 100% 100%;
             border: 5px solid black;
         }
     </style>
@@ -22,7 +21,10 @@
 <body>
     <div id="root"></div>
     <script type="text/javascript">
-        root.style.background = 'url(https://i.imgur.com/vR8w3xT.jpg)';
+        var root = document.getElementById('root');
+
+        //root.style.background = 'url(https://i.imgur.com/vR8w3xT.jpg)';
+        root.style.background = 'gray';
 
         function getRandomNumber(min, max) {
             return Math.floor(Math.random() * (max - min)) + min;
@@ -42,6 +44,8 @@
         }
     </script>
     <!--<script type="text/javascript" src="script-create-divs.js"></script>-->
-    <script type="text/javascript" src="script-circular-moves.js"></script>
+    <!--<script type="text/javascript" src="script-circular-moves.js"></script>-->
+    <!--<script type="text/javascript" src="script-textarea.js"></script>-->
+    <script type="text/javascript" src="script-tag-cloud.js"></script>
 </body>
 </html>

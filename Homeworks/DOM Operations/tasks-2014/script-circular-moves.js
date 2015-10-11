@@ -11,11 +11,10 @@
     div.style.background = getRandomColor();
     div.style.border = '5px solid black';
     div.style.position = 'absolute';
-    div.className = 'moved';
 
     function animation() {
         var docFrag = document.createDocumentFragment(),
-            rootChild = document.getElementsByClassName('moved');
+            rootChild = root.getElementsByTagName('div');
 
         while (rootChild.length) {
             root.removeChild(rootChild[0]);
@@ -36,13 +35,13 @@
             angle = 0;
         }
 
-        setTimeout(animation, getRandomNumber(50, 100));
-        //requestAnimationFrame(animation);
+        //setTimeout(animation, getRandomNumber(5, 50));
+        requestAnimationFrame(animation);
     }
 
     function changeAttributes() {
-        values.ELLIPSE_RADIUS_X = getRandomNumber(100, 600);
-        values.ELLIPSE_RADIUS_Y = getRandomNumber(100, 300);
+        values.ELLIPSE_RADIUS_X = getRandomNumber(document.body.clientWidth / 10, document.body.clientWidth / 3);
+        values.ELLIPSE_RADIUS_Y = getRandomNumber(document.body.clientHeight / 10, document.body.clientHeight / 3);
 
         div.style.width = getRandomNumber(45, 75) + 'px';
         div.style.height = getRandomNumber(45, 75) + 'px';
@@ -53,4 +52,4 @@
 
     animation();
     changeAttributes();
-}(200));
+}(70));
