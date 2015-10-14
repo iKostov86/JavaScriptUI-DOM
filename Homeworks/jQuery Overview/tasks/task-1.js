@@ -21,8 +21,24 @@
 
 function solve() {
     return function (selector, count) {
-        var $ul = $('ul');
+        var $this = $(selector);
+
+        console.log('dr');
+
+        if ($this.length > 0) {
+            var $ul = $('ul')
+                .addClass('list-item');
+
+            for (var i = 0; i < count; i += 1) {
+                $ul.append($('li')
+                    .html('List item #' + i));
+            }
+
+            $this.append($ul);
+        }
     };
 };
 
-module.exports = solve;
+solve('drun', 5);
+
+//module.exports = solve;
