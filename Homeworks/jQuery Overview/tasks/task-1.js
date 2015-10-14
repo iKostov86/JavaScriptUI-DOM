@@ -21,16 +21,23 @@
 
 function solve() {
     return function (selector, count) {
-        var $this = $(selector);
+        if (!selector || typeof selector !== 'string') {
+            throw Error;
+        }
 
-        console.log('dr');
+        var $this = $(selector);
+        count = +count;
 
         if ($this.length > 0) {
-            var $ul = $('ul')
-                .addClass('list-item');
+            if (isNaN(count) || count < 1) {
+                throw Error;
+            }
+
+            var $ul = $('<ul />').addClass('items-list');
 
             for (var i = 0; i < count; i += 1) {
-                $ul.append($('li')
+                $ul.append($('<li />')
+                    .addClass('list-item')
                     .html('List item #' + i));
             }
 
@@ -39,6 +46,4 @@ function solve() {
     };
 };
 
-solve('drun', 5);
-
-//module.exports = solve;
+module.exports = solve;
