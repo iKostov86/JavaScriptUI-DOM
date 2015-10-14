@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery Plugins Demo</title>
+	<meta charset="utf-8" />
+    <style>
+        html, body {
+            margin: 5px;
+            padding: 5px;
+        }
+        .someDivs {
+            display: flex;
+            /*justify-content: center;*/
+            align-items: center;
+            margin: 5px;
+            padding: 5px;
+            width: 25%;
+            height: 150px;
+            border: 2px solid green;
+            background-color: rebeccapurple;
+            border-radius: 10px;
+            font-size: 72px;
+            color: transparent;
+        }
+    </style>
+    <link href="jquery-ui/jquery-ui.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="someDivs">ДИДКЕ ПИТКЕ</div>
+    <div class="someDivs">ТИ СИ</div>
+    <div class="someDivs">МАЛКА ПРЪЧКА</div>
+    <script src="libs/jquery-2.1.4.min.js"></script>
+    <script src="jquery-ui/jquery-ui.js"></script>
+    <script src="scripts/jQueryZoomPlugin.js"></script>
+    <script>
+        $('.someDivs').zoom();
+    </script>
+</body>
+</html>

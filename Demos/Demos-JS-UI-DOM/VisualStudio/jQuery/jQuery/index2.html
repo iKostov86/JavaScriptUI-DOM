@@ -1,0 +1,209 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery</title>
+    <meta charset="utf-8" />
+    <style>
+        body * {
+            margin: 5px;
+            padding: 5px; 
+            border: 1px solid green;
+            border-collapse: separate;
+        }
+
+        .menu1 {
+            width: 100%;
+            height: auto;
+            border: 1px solid purple;
+            background-color: green;
+        }
+
+        .menu2 {
+            width: 100%;
+            height: auto;
+            border: 1px solid blue;
+            background-color: palevioletred;
+        }
+        #the-input {
+            border: 3px solid orange;
+        }
+    </style>
+</head>
+<body>
+    <!--<select id="the-select" name="" multiple="multiple">-->
+    <select id="the-select" name="">
+        <option value="">1</option>
+        <option value="">2</option>
+        <option value="">3</option>
+        <option value="" selected>4</option>
+        <option value="">5</option>
+    </select>
+    <div id="first">
+        <div id="second">
+            <div id="third">
+                <div id="fourth">
+                    <div id="fifth">
+                        <div id="zeroth"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="to-remove">1</div>
+    <div class="to-remove">2</div>
+    <div class="to-remove">3</div>
+    <div class="to-remove">4</div>
+    <div class="to-remove">5</div>
+    <div class="to-remove">6</div>
+    <div class="to-remove">7</div>
+    <div class="to-remove">8</div>
+    <div class="to-remove">9</div>
+    <div class="to-remove">10</div>
+    <div class="to-remove">11</div>
+    <div class="to-remove">12</div>
+    <div class="to-remove">13</div>
+    <div class="to-remove">14</div>
+    <div class="to-remove">15</div>
+    <!--<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>-->
+    <script src="libs/jquery-2.1.4.min.js"></script>
+    <script>
+        var i;
+        var $select = $('#the-select');
+        var $selected = $('#the-select :selected');
+        var $optionSelected = $('option:selected');
+        var $selectChildrenSelected = $select.children(':selected');
+        var $options = $('option');
+
+        for (i = 0; i < $options.length; i += 1) {
+            //console.log($options[i].innerHTML);
+            //or
+            var $option = $($options[i]);
+            var $nexOption = $($options[i]).next();
+            var $prevOption = $($options[i]).prev();
+
+            //console.log($option.html());
+            //console.log($nexOption.html());
+            //console.log($prevOption.html());
+        }
+
+        var $zeroth = $('#zeroth');
+        var $zerothParent = $zeroth.parent();
+        var $zerothParents = $zeroth.parents();
+
+        for (i = 0; i < $zerothParent.length; i += 1) {
+            var $id = $($zerothParent[i]).attr('id');
+
+            if (typeof $id !== 'undefined') {
+                console.log($id);
+            }
+        }
+
+        console.log('----------');
+
+        for (i = 0; i < $zerothParents.length; i += 1) {
+            var $id = $($zerothParents[i]).attr('id');
+
+            if (typeof $id !== 'undefined') {
+                console.log($id);
+            }
+        }
+
+        $zerothParents.each(function (index, item) {
+            console.log(index + ' = ' + $(item).attr('id'));
+        });
+
+        for (i = 0; i < $options.length; i += 1) {
+            $($options[i]).prepend('This is: ');
+            $($options[i]).append(' choise.');
+
+            //$('<span>This is :</span>').prependTo($options[i]);
+            //$('<span> choise.</span>').appendTo($options[i]);
+        }
+
+        $('<p>brum</p>').prependTo('div.to-remove');
+
+        setTimeout(function () {
+            $('div.to-remove *:even').remove();
+
+            setTimeout(function () {
+                $('div.to-remove *:odd').remove();
+
+                setTimeout(function () {
+                    $('div.to-remove *:nth-child(3n-1)').remove();
+
+                    setTimeout(function () {
+                        $('div.to-remove *').remove();
+                    }, 1000);
+                }, 1000);
+            }, 1000);
+        }, 1000);
+
+        setTimeout(function () {
+            $('div.to-remove:even').empty();
+
+            setTimeout(function () {
+                $('div.to-remove:odd').empty();
+
+                setTimeout(function () {
+                    $('div.to-remove:nth-child(3n-1)').empty();
+
+                    setTimeout(function () {
+                        $('div.to-remove').empty();
+                    }, 1000);
+                }, 1000);
+            }, 1000);
+        }, 1000);
+
+        var $ul = $('<ul></ul>');
+        //or
+        var ul = document.createElement('ul');
+        var $ul = $(ul);
+
+        $ul.hide().show();
+        $ul.addClass('menu');
+        $ul.removeClass('menu');
+        $ul.prependTo($('body'));
+
+        //function toggleClasses() {
+        //    var number = Math.random();
+
+        //    if (number < 0.5) {
+        //        $ul.toggleClass('menu1');
+        //    } else {
+        //        $ul.toggleClass('menu2');
+        //    }
+        //    setTimeout(toggleClasses, 100);
+        //}
+
+        //toggleClasses();
+
+        //function fadeOut() {
+        //    $ul.fadeOut(fadeIn, 1000);
+        //}
+
+        //function fadeIn() {
+        //    $ul.fadeIn(fadeOut, 1000);
+        //}
+
+        //fadeOut();
+
+        $(document).ready(function () {
+            var $input = $('<input />');
+
+            $input.attr('type', 'text');
+            $input.attr('id', 'the-input');
+            $input.appendTo(document.body);
+            $('#the-input').on('change', onInputChange);
+        })
+
+        function onInputChange() {
+            var $message = $(this).val();
+            $(this).val('');
+            var $span = $('<span />');
+
+            $span.append($message);
+            $('body').append($span);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <ul>
+        <li>TEXT1</li>
+        <li>TEXT2</li>
+        <li>TEXT3</li>
+        <li>TEXT4</li>
+        <li>TEXT5</li>
+    </ul>
+    <input type="checkbox" checked="checked"/>
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <!--<script type="text/javascript" src="libs/jquery-2.1.4.min.js"></script>-->
+    <script>
+        var nativeUl = document.getElementsByTagName('ul');
+        var $ul = $(nativeUl)
+            .attr('id', 'menu')
+            .prepend('MENU')
+            .css({ position: 'absolute', left: '0', top: '50px', 'text-decoration': 'underline' });
+
+        var $lis = $ul.children('li')
+            .addClass('list-item')
+            .attr('data-attribute', 'value')
+            .hide(2000)
+            .show('slow');
+
+        var $div = $('<div />')
+            .text('very crazy div ')
+            .append('some text ')
+            .appendTo('body');
+
+        $('#menu').on('click', 'li', function () {
+            $this = $(this);
+            console.log($this.text());
+        });
+
+        //$('#menu').click(function () {
+        //    $this = $(this);
+        //    alert($this.text());
+        //});
+
+        var $someLi = $('#menu li').animate({
+            'opacity': '0.15'
+        }, 2000, function () {
+            console.log('finished');
+        });
+
+        $('html').on('click', function () {
+            $ul.slideToggle('slow');
+        });
+
+        console.log($('input').is(':checked'));
+
+        $('input').hover(function () {
+            console.log('hover-on');
+        }, function () {
+            console.log('hover-off');
+        });
+    </script>
+</body>
+</html>
