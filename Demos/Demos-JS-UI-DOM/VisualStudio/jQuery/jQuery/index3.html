@@ -2,12 +2,13 @@
 <html>
 <head>
     <title>jQuery Plugins Demo</title>
-	<meta charset="utf-8" />
+    <meta charset="utf-8" />
     <style>
         html, body {
             margin: 5px;
             padding: 5px;
         }
+
         .someDivs {
             display: flex;
             /*justify-content: center;*/
@@ -32,8 +33,12 @@
     <script src="libs/jquery-2.1.4.min.js"></script>
     <script src="jquery-ui/jquery-ui.js"></script>
     <script src="scripts/jQueryZoomPlugin.js"></script>
-    <script>
-        $('.someDivs').zoom();
+    <script type="text/javascript">
+        (function ($) {
+            $(document).ready(function () {
+                $('.someDivs').zoom(1.5);
+            });
+        }(jQuery))
     </script>
 </body>
 </html>

@@ -1,32 +1,36 @@
-﻿$.fn.zoom = function () {
-    var $this = $(this.selector);
+﻿(function ($) {
+    $.fn.zoom = function (scale) {
+        var $this = $(this.selector);
 
-    $this.on('mouseover', function (ev) {
-        var $this = $(this);
+        scale = scale || 2;
 
-        //return string - '100px'
-        //var width = $this.css('width');
-        //var height = $this.css('height');
+        $this.on('mouseover', function (ev) {
+            var $this = $(this);
 
-        //return value - 100
-        var w = $this.width();
-        var h = $this.height();
+            //return string - '100px'
+            //var width = $this.css('width');
+            //var height = $this.css('height');
 
-        $this.width(w * 2);
-        $this.height(h * 2);
-        $this.css({ color: 'yellow' });
-    });
+            //return value - 100
+            var w = $this.width();
+            var h = $this.height();
 
-    $this.on('mouseout', function (ev) {
-        var $this = $(this);
+            $this.width(w * scale);
+            $this.height(h * scale);
+            $this.css({ color: 'yellow' });
+        });
 
-        var w = $this.width();
-        var h = $this.height();
+        $this.on('mouseout', function (ev) {
+            var $this = $(this);
 
-        $this.width(w / 2);
-        $this.height(h / 2);
-        $this.css({color: 'transparent'});
-    });
+            var w = $this.width();
+            var h = $this.height();
 
-    return $this;
-};
+            $this.width(w / scale);
+            $this.height(h / scale);
+            $this.css({ color: 'transparent' });
+        });
+
+        return $this;
+    };
+}(jQuery))

@@ -19,8 +19,31 @@
  */
 function solve() {
     return function (selector) {
+        var $this,
+            $element,
+            $buttons,
+            $content;
 
+        $this = $(this);
+        $element = $(selector);
+        $buttons = $('.button');
+        $content = $('.content');
+
+        if (!($element instanceof jQuery) || typeof $element !== 'string') {
+            throw Error;
+        }
+
+        if ($buttons.length > 0 && $content.length > 0) {
+            $buttons.html().hide();
+
+            $buttons.on('click', function () {
+                var $this = $(this);
+                var $topmost = $('.content \~ .button');
+            });
+        }
+
+        return $this;
     };
-};
+}
 
 module.exports = solve;
