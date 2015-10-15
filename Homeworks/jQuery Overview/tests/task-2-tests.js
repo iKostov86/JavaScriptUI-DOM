@@ -49,7 +49,7 @@ describe('Task #2 Tests', function () {
         buttonNode.className = 'button';
         container.appendChild(buttonNode);
 
-        possibleTags[(Math.random() * possibleTags.length) | 0];
+        // possibleTags[(Math.random() * possibleTags.length) | 0];
         contentNode = document.createElement(tag);
         contentNode.className = 'content';
         container.appendChild(contentNode);
@@ -67,7 +67,7 @@ describe('Task #2 Tests', function () {
     it('expect to hide the next content on button click, and then show it again, when there are other elements', function () {
       function createDummyNode() {
         var tags = ['a', 'button', 'p', 'div', 'ul', 'li', 'ol', 'input', 'table', 'tr', 'br', 'hr', 'span'];
-        var node = document.createElement(tags[(Math.random * tags.length) | 0]);
+        var node = document.createElement(tags[(Math.random() * tags.length) | 0]);
         node.innerHTML = 'Dummy Element: ' + Math.random();
         return node;
       }

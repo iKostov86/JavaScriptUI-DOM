@@ -32,14 +32,15 @@ function solve() {
         $this = $(selector);
 
         if ($this.length > 0) {
-            var $ul = $('<ul />').addClass('items-list');
+            var $ul = $('<ul />').addClass('items-list'),
+                $li = $('<li />').addClass('list-item');
 
             for (var i = 0; i < count; i += 1) {
-                var $li = $('<li />')
-                    .addClass('list-item')
+                var $newLi = $li
+                    .clone()
                     .html('List item #' + i);
 
-                $ul.append($li);
+                $ul.append($newLi);
             }
 
             $this.append($ul);
