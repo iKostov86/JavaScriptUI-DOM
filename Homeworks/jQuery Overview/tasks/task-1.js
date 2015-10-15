@@ -21,7 +21,28 @@
 
 function solve() {
     return function (selector, count) {
-        var $ul = $('ul');
+        if (!selector || typeof selector !== 'string') {
+            throw Error;
+        }
+
+        var $this = $(selector);
+        count = +count;
+
+        if ($this.length > 0) {
+            if (isNaN(count) || count < 1) {
+                throw Error;
+            }
+
+            var $ul = $('<ul />').addClass('items-list');
+
+            for (var i = 0; i < count; i += 1) {
+                $ul.append($('<li />')
+                    .addClass('list-item')
+                    .html('List item #' + i));
+            }
+
+            $this.append($ul);
+        }
     };
 };
 
