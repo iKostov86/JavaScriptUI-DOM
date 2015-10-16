@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>HandlebarsJS-Demo</title>
+	<meta charset="utf-8" />
+    <style>
+        #wrapper {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper"></div>
+
+    <script src="handlebars-v4.0.2.js"></script>
+
+    <script id="template" type="text/x-handlebars-template">
+        <ul>
+            {{#items}}
+            <li>
+                <h1>Hi!</h1>
+                My name is <strong>{{name}}</strong>.
+                I am {{age}} years old.
+                {{#if adult}}
+                I am <strong>an adult</strong>.
+                {{/if}}
+                {{#unless adult}}
+                I am <strong>a child</strong>.
+                {{/unless}}
+                <div>
+                    I have:
+                </div>
+                {{#each have}}
+                t.{{@index}}: {{this}};
+                {{/each}}
+            </li>
+            {{/items}}
+        </ul>
+    </script>
+    <script>
+        /* globals Handlebars, $ */
+        var templateHtml = document.getElementById('template').innerHTML;
+        var template = Handlebars.compile(templateHtml);
+
+
+        var data = {
+            items: []
+        };
+
+        var i,
+            count = 15;
+
+        for (i = 0; i < count; i += 1) {
+            var obj = {
+                name: 'John #' + (i + 1),
+                age: new Handlebars.SafeString('<strong>' + (10 + i) + '</strong>'),
+                adult: i > 7,
+                have: ['car', 'laptop']
+            };
+
+            data.items.push(obj);
+        }
+
+        var output = template(data);
+        var wrapper = document.getElementById('wrapper');
+
+        wrapper.innerHTML = output;
+    </script>
+</body>
+</html>
