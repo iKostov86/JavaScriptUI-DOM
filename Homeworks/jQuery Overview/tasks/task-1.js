@@ -21,29 +21,31 @@
 
 function solve() {
     return function (selector, count) {
-        if (!selector || typeof selector !== 'string') {
+        var $this;
+
+        count = +count;
+
+        if (typeof selector !== 'string' || isNaN(count) || count < 1) {
             throw Error;
         }
 
-        var $this = $(selector);
-        count = +count;
+        $this = $(selector);
 
         if ($this.length > 0) {
-            if (isNaN(count) || count < 1) {
-                throw Error;
-            }
-
-            var $ul = $('<ul />').addClass('items-list');
+            var $ul = $('<ul />').addClass('items-list'),
+                $li = $('<li />').addClass('list-item');
 
             for (var i = 0; i < count; i += 1) {
-                $ul.append($('<li />')
-                    .addClass('list-item')
-                    .html('List item #' + i));
+                var $newLi = $li
+                    .clone()
+                    .html('List item #' + i);
+
+                $ul.append($newLi);
             }
 
             $this.append($ul);
         }
     };
-};
+}
 
 module.exports = solve;

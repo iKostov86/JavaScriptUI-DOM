@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>HandlebarsJS-Helpers-Demo</title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <div id="wrapper"></div>
+
+    <script src="handlebars-v4.0.2.js"></script>
+
+    <script id="with-template" type="text/x-handlebars-template">
+        {{#with address.street}}
+        <h1>{{name}} {{number}}</h1>
+        {{/with}}
+    </script>
+    <script>
+        var templateHtml = document.getElementById('with-template').innerHTML;
+        var template = Handlebars.compile(templateHtml);
+
+        var date = {
+            name: 'John',
+            age: 21,
+            address: {
+                country: 'Bulgaria',
+                city: 'Plovdiv',
+                street: {
+                    name: 'bul."Donducov"',
+                    number: 31
+                }
+            }
+        };
+        var output = template(date);
+        var wrapper = document.getElementById('wrapper');
+
+        wrapper.innerHTML = output;
+    </script>
+
+    <!--<script id="auxiliary-template" type="text/x-handlebars-template">
+        <strong>
+            {{!this}}
+        </strong>
+    </script>-->
+    <script id="custom-helper-template" type="text/x-handlebars-template">
+        {{!#customHelper tags auxiliaryTemplate}}
+        {{!/customHelper}}
+        {{#customHelper tags}}
+        <strong>
+            {{this}}
+        </strong>
+        {{/customHelper}}
+    </script>
+    <script>
+        //Handlebars.registerHelper('customHelper', function (tags, auxiliaryTemplate) {
+        //    var html = '<ul class="tags-list">';
+        //    var auxTemplate = Handlebars.compile(document.getElementById(auxiliaryTemplate));
+
+        //    tags.forEach(function (tag) {
+        //        html += '<li class="tag">' + auxTemplate(tag) + '</li>';
+        //    });
+
+        //    html += '</ul>';
+
+        //    //return new Handlebars.SafeString(html);
+        //    return html;
+        //});
+        Handlebars.registerHelper('customHelper', function (tags, options) {
+            var html = '<ul class="tags-list">';
+
+            tags.forEach(function (tag) {
+                html += '<li class="tag">' + options.fn(tag) + '</li>';
+            });
+
+            html += '</ul>';
+
+            //return new Handlebars.SafeString(html);
+            return html;
+        });
+    </script>
+    <script>
+        var templateHtml = document.getElementById('custom-helper-template').innerHTML;
+        var customTemplate = Handlebars.compile(templateHtml);
+
+        var date = {
+            //auxiliaryTemplate: 'auxiliary-template',
+            tags: ['C#', 'C++', 'HTML5', 'CSS3', 'Javascript']
+        };
+        var output = customTemplate(date);
+        var wrapper = document.getElementById('wrapper');
+
+        wrapper.innerHTML += output;
+    </script>
+</body>
+</html>
