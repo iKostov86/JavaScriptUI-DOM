@@ -6,26 +6,26 @@ function solve() {
         var template = '<div class="container">' +
             '<h1>Animals</h1>' +
             '<ul class="animals-list">' +
-                '{{#animals}}' +
+                '{{#each animals}}' +
                     '<li>' +
-                        '<a href=' +
-                            '{{#if url}}' +
-                            '{{url}}>' +
-                            'See a {{name}}' +
+                        '<a href="' +
+                            '{{#if this.url}}' +
+                            '{{this.url}}">' +
+                            'See a {{this.name}}' +
                             '{{/if}}' +
-                            '{{#unless url}}' +
-                            defaultUrl + '>' +
-                            'No link for {{name}}, here is Batman!' +
+                            '{{#unless this.url}}' +
+                            defaultUrl + '">' +
+                            'No link for {{this.name}}, here is Batman!' +
                             '{{/unless}}' +
-                        '</a>' +
+                        '<\/a>' +
                     '</li>' +
-                '{{/animals}}' +
+                '{{/each}}' +
             '</ul>' +
         '</div>';
 
         //$container.appendTo(document.body);
         $(selector).html(template);
     };
-};
+}
 
 module.exports = solve;
