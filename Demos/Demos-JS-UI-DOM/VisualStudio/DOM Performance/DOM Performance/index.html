@@ -1,0 +1,214 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>DOM Performance</title>
+    <meta charset="utf-8" />
+    <style>
+        #root {
+            border: 1px solid green;
+        }
+    </style>
+</head>
+<body>
+    <!-- creating elements -->
+    <!-- quering elements -->
+    <!-- applying styles -->
+    <!-- events -->
+    <a href="#" id="btn-add">Add</a>
+    <div id="root">
+    </div>
+    <ul id="list">
+        <li>item #1</li>
+        <li>item #2</li>
+        <li>item #3</li>
+        <li>item #4</li>
+        <li>item #5</li>
+    </ul>
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script>
+        var root = document.getElementById('root');
+        var addBtn = document.getElementById('btn-add');
+
+        addBtn.addEventListener('click', function () {
+            var item = document.createElement('div');
+
+            item.innerHTML = new Date();
+            root.appendChild(item);
+        });
+
+        var count = 5;
+        //var list = document.createElement('ul');
+
+        //for (var i = 0; i < count; i += 1) {
+        //    var item = document.createElement('li');
+
+        //    item.innerHTML = 'Content #' + i;
+        //    list.appendChild(item);
+        //}
+
+        //root.appendChild(list);
+
+        /*   */
+
+        //var html = '';
+
+        //for (var i = 0; i < count; i += 1) {
+        //    var item = document.createElement('div');
+
+        //    item.innerHTML = 'Content #' + i;
+        //    html += item.outerHTML;
+        //}
+
+        //root.innerHTML += html;
+
+        /*   */
+
+        //var docFrag = document.createDocumentFragment();
+
+        //for (var i = 0; i < count; i += 1) {
+        //    var item = document.createElement('div');
+
+        //    item.innerHTML = 'Content #' + i;
+        //    docFrag.appendChild(item);
+        //}
+
+        //root.appendChild(docFrag);
+
+        /*   */
+
+        //var divHolder = document.createElement('div');
+
+        //for (var i = 0; i < count; i += 1) {
+        //    var item = document.createElement('div');
+
+        //    item.innerHTML = 'Content #' + i;
+        //    divHolder.appendChild(item);
+        //}
+
+        //root.innerHTML += divHolder.innerHTML;
+
+        /*   */
+
+        //var docFrag = document.createDocumentFragment();
+        //var post = document.createElement('div');
+        //var article = document.createElement('article');
+        //var header = document.createElement('header');
+        //var heading = document.createElement('h1');
+
+        //post.className = 'post';
+        //article.className = 'post-article';
+
+        //header.appendChild(heading);
+        //article.appendChild(header);
+        //post.appendChild(article);
+
+        //for (var i = 0; i < count; i += 1) {
+        //    heading.innerHTML = 'Heading #' + i;
+        //    docFrag.appendChild(post.cloneNode(true));
+        //}
+
+        //root.appendChild(docFrag);
+    </script>
+    <script>
+        //var $div = $('<div/>')
+        //    .addClass('the-class');
+        //var $copy = $div.clone();
+
+        var $list = $('<ul/>');
+
+        for (var i = 0; i < count; i += 1) {
+            $('<li/>')
+                .addClass('item')
+                .html('Item #' + i)
+                .appendTo($list);
+        }
+
+        $list.appendTo(root);
+
+        //transform from dom to jquery element
+        //$(root).append($list);
+
+        //transfrom from jquery to dom element
+        //$list.get(0);
+        //$list.eq(2)
+
+        var $items = $('.item');
+
+        $items.each(function (index, item) {
+            $(item)
+                .addClass('pretty')
+                .css('background', 'pink');
+        });
+    </script>
+    <script>
+        document.getElementById('btn-add')
+            .addEventListener('click', function () {
+                console.log('DOM API event.');
+            });
+
+        document
+            .querySelector('ul')
+            .addEventListener('click', 'li', function () {
+                console.log(this.innerHTML);
+            });
+
+        $('#list').on('click', 'li', function () {
+            var $this = $(this);
+            console.log($this.html());
+        });
+
+        // the .live() method attaches the event handler to the root level document - depricated
+        //$('#btn-add').live('click', function () {
+        //});
+
+        //the .delegate() method is like a .live() but you can choose where it is anchored
+        //$('#btn-add').delegate('span', 'click', function () {
+        //});
+
+        //the .bind() method attaches the event handler to all elements that are matched - wastefully
+        //$('#btn-add').bind('click', function () {
+        //});
+
+        //the shorthand method of the above one
+        //$('#btn-add').click(function () {
+        //});
+
+        //bind: function( types, data, fn ) {
+        //    return this.on( types, null, data, fn );
+        //},
+        //unbind: function( types, fn ) {
+        //    return this.off( types, null, fn );
+        //},
+
+        //live: function( types, data, fn ) {
+        //    jQuery( this.context ).on( types, this.selector, data, fn );
+        //    return this;
+        //},
+        //die: function( types, fn ) {
+        //    jQuery( this.context ).off( types, this.selector || "**", fn );
+        //    return this;
+        //},
+
+        //delegate: function( selector, types, data, fn ) {
+        //    return this.on( types, selector, data, fn );
+        //},
+        //undelegate: function( selector, types, fn ) {
+        //    return arguments.length == 1 ? 
+        //        this.off( selector, "**" ) : 
+        //        this.off( types, selector, fn );
+        //},
+    </script>
+    <script>
+        var style = document.createElement('style');
+        style.type = 'text/css';
+        style.innerHTML = 'css content';
+        document.getElementsByTagName('head')[0].appendChild(style);
+
+        $('li')
+            .css({
+                borderBottom: '1px solid green',
+                listStyleType: 'none'
+            });
+    </script>
+</body>
+</html>
