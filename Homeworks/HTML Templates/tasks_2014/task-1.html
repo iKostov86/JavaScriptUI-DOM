@@ -2,9 +2,70 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>handlebars task_1</title>
+    <style>
+        table, th, td {
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+        th {
+            background-color: darkgray;
+            color: #fff;
+        }
+
+        tr:nth-child(odd) {
+            background-color: lightgray;
+        }
+    </style>
 </head>
 <body>
+
+<script type="text/javascript" src="..\node_modules\jquery\dist\jquery.min.js"></script>
+<script type="text/javascript" src="..\node_modules\handlebars\dist\handlebars.js"></script>
+
+<script id="script-template" type="text/x-handlebars-template">
+    <table>
+        <tr>
+            {{#header}}
+            <th>{{this}}</th>
+            {{/header}}
+        </tr>
+        {{#content}}
+        <tr>
+            {{#this}}
+            <td>{{this}}</td>
+            {{/this}}
+        </tr>
+        {{/content}}
+    </table>
+</script>
+
+<script type="text/javascript">
+    var data = {
+        header: ['№', 'Title', 'Date #1', 'Date #2'],
+        content: [
+            [0, 'Course Introduction', new Date(), new Date()],
+            [1, 'Document Object Model', new Date(), new Date()],
+            [2, 'HTML5 Canvas', new Date(), new Date()],
+            [3, 'Kinetic JS Overview', new Date(), new Date()],
+            [4, 'SVG and RaphaelJS', new Date(), new Date()],
+            [5, 'Animation with Canvas and SVG', new Date(), new Date()],
+            [6, 'DOM Operations', new Date(), new Date()],
+            [7, 'Event Model', new Date(), new Date()],
+            [8, 'jQuery Overview', new Date(), new Date()],
+            [9, 'HTML Templates', new Date(), new Date()],
+            [10, 'Exam Preparation', new Date(), new Date()],
+            [11, 'Exam', new Date(), new Date()],
+            [12, 'Teamwork Defence', new Date(), new Date()]
+        ]
+    };
+
+    var scriptTemplate = $('#script-template').html();
+    var handleMethod = Handlebars.compile(scriptTemplate);
+    var template = handleMethod(data);
+
+    $('body').append(template);
+</script>
 
 </body>
 </html>

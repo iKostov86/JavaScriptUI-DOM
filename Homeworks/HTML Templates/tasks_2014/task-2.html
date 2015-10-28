@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>handlebars task_2</title>
+</head>
+<body>
+
+<script type="text/javascript" src="..\node_modules\jquery\dist\jquery.min.js"></script>
+<script type="text/javascript" src="..\node_modules\handlebars\dist\handlebars.js"></script>
+
+<script id="script-template" type="text/x-handlebars-template">
+    <select>
+        {{#this}}
+        <option value="{{value}}">{{text}}</option>
+        {{/this}}
+    </select>
+</script>
+
+<script type="text/javascript">
+    console.log($('#script-template').data('template'));
+
+    var items = [
+        {
+            value: 1,
+            text: 'One'
+        },
+        {
+            value: 2,
+            text: 'Two'
+        },
+        {
+            value: 3,
+            text: 'Three'
+        },
+        {
+            value: 4,
+            text: 'Four'
+        }
+    ];
+
+    var scriptTemplate = $('#script-template').html();
+    var handleMethod = Handlebars.compile(scriptTemplate);
+    var template = handleMethod(items);
+
+    $('body').append(template);
+</script>
+
+</body>
+</html>

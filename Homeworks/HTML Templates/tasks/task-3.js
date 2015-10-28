@@ -3,7 +3,13 @@ function solve() {
         $.fn.listview = function (data) {
             var $this = this;
             var dateAttr = $this.data('template');
-            var htmlTemplate = $('#' + dateAttr).html();
+
+            if (typeof dateAttr !== 'undefined') {
+                var htmlTemplate = $('#' + dateAttr).html();
+            } else {
+                var htmlTemplate = $this.html();
+            }
+
             var template = '{{#each this}}' + htmlTemplate + '{{/each}}';
 
             //var template = handlebars.compile(htmlTemplate);
