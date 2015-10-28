@@ -6,7 +6,7 @@ function solve() {
         var template = '<div class="container">' +
             '<h1>Animals</h1>' +
             '<ul class="animals-list">' +
-                '{{#each animals}}' +
+                '{{#animals}}' +
                     '<li>' +
                         '<a href="' +
                             '{{#if this.url}}' +
@@ -15,11 +15,11 @@ function solve() {
                             '{{/if}}' +
                             '{{#unless this.url}}' +
                             defaultUrl + '">' +
-                            'No link for {{this.name}}, here is Batman!' +
+                            'No link for {{this.name}} , here is Batman!' +
                             '{{/unless}}' +
                         '<\/a>' +
                     '</li>' +
-                '{{/each}}' +
+                '{{/animals}}' +
             '</ul>' +
         '</div>';
 
