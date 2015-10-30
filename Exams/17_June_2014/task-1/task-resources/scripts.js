@@ -100,24 +100,15 @@ function createImagesPreviewer(selector, items) {
     var root = document.querySelector(selector);
     root.style.textAlign = 'center';
 
-    var docFrag = document.createDocumentFragment();
-
     var left = document.createElement('div');
     var right = document.createElement('div');
 
     left.className = 'left-panel';
     left.className += ' image-preview';
-    left.style.float = 'left';
-    left.style.width = '50%';
-    left.style.height = '500px';
-    left.style.backgroundColor = 'orange';
-    left.style.borderRadius = '10px';
+    left.style.cssText = 'float: left; width: 50%; height: 500px; color: white; background-color: mediumslateblue; border-radius: 10px 0 0 10px;';
 
     right.className = 'right-panel';
-    right.style.float = 'left';
-    right.style.width = '20%';
-    right.style.height = '500px';
-    right.style.marginLeft = '10px';
+    right.style.cssText = 'float: left; width: 20%; height: 500px; margin-left: 10px;';
 
     //left
     var title = document.createElement('h1');
@@ -125,9 +116,7 @@ function createImagesPreviewer(selector, items) {
 
     var img = document.createElement('img');
     img.src = items[0].url;
-    img.style.width = '500px';
-    img.style.height = '400px';
-    img.style.borderRadius = '10px';
+    img.style.cssText = 'width: 500px; height: 400px; border-radius: 10px;';
 
     left.appendChild(title);
     left.appendChild(img);
@@ -135,23 +124,19 @@ function createImagesPreviewer(selector, items) {
     //right
     var label = document.createElement('label');
     label.innerHTML = 'Filter';
-    label.style.display = 'block';
     label.setAttribute('for', 'filter-id');
+    label.style.cssText = 'display: block;';
 
     var filter = document.createElement('input');
     filter.id = 'filter-id';
-    filter.style.width = '90%';
+    filter.style.cssText = 'width: 90%;';
 
     var filterWrapper = document.createElement('div');
-    filterWrapper.style.height = '10%';
-    filterWrapper.style.backgroundColor = 'lightblue';
-    filterWrapper.style.borderRadius = '10px 10px 0 0';
+    filterWrapper.style.cssText = 'height: 10%; background-color: lightblue;';
 
     var imgWrapper = document.createElement('div');
     imgWrapper.className = 'image-wrapper';
-    imgWrapper.style.height = '90%';
-    imgWrapper.style.backgroundColor = '#11ff11';
-    imgWrapper.style.overflowY = 'scroll';
+    imgWrapper.style.cssText = 'height: 90%; background-color: aquamarine; overflow-y: scroll';
 
     filterWrapper.appendChild(label);
     filterWrapper.appendChild(filter);
@@ -162,16 +147,13 @@ function createImagesPreviewer(selector, items) {
     //items
     var itemContainer = document.createElement('div');
     itemContainer.className = 'image-container';
-    itemContainer.style.backgroundColor = 'violet';
-    itemContainer.style.borderRadius = '10px';
+    itemContainer.style.cssText = 'background-color: lightgray; border-radius: 10px; cursor: pointer;';
 
     var itemTitle = document.createElement('h3');
-    itemTitle.style.height = '10px';
+    itemTitle.style.cssText = 'height: 10px';
 
     var itemImg = document.createElement('img');
-    itemImg.style.width = '90%';
-    itemImg.style.height = '150px';
-    itemImg.style.borderRadius = '10px';
+    itemImg.style.cssText = 'width: 90%; height: 150px; border-radius: 10px';
 
     items.forEach(function (item) {
         var currentItemContainer = itemContainer.cloneNode(true);
@@ -182,13 +164,21 @@ function createImagesPreviewer(selector, items) {
         var currentItemImg = itemImg.cloneNode(true);
         currentItemImg.src = item.url;
 
-        currentItemContainer.appendChild(itemTitle);
-        currentItemContainer.appendChild(itemImg);
+        currentItemContainer.appendChild(currentItemTitle);
+        currentItemContainer.appendChild(currentItemImg);
 
         imgWrapper.appendChild(currentItemContainer);
     });
 
     //events
+    left.addEventListener('mouseover', function () {
+        left.style.backgroundColor = 'orangered';
+    });
+
+    left.addEventListener('mouseout', function () {
+        left.style.backgroundColor = 'mediumslateblue';
+    });
+
     filter.addEventListener('input', function () {
         var i,
             len,
@@ -213,7 +203,7 @@ function createImagesPreviewer(selector, items) {
         }
 
         function hide(i) {
-            titles[i].parentNode.style.display = 'none';
+            titles[i].parentNode.styledisplay = 'none';
         }
 
         function show(i) {
@@ -229,7 +219,7 @@ function createImagesPreviewer(selector, items) {
                 target = target.parentNode;
             }
 
-            target.style.backgroundColor = '';
+            target.style.backgroundColor = 'gray';
         }
     });
 
@@ -241,23 +231,21 @@ function createImagesPreviewer(selector, items) {
                 target = target.parentNode;
             }
 
-            target.style.backgroundColor = 'violet';
+            target.style.backgroundColor = 'lightgray';
         }
     });
 
     imgWrapper.addEventListener('click', function (ev) {
         var target = ev.target;
 
-        if (target.className === 'image-wrapper') {
-            return;
-        }
+        if (target.className !== 'image-wrapper') {
+            while (target.className.indexOf('image-container') < 0) {
+                target = target.parentNode;
+            }
 
-        while (target.className.indexOf('image-container') < 0) {
-            target = target.parentNode;
+            title.innerHTML = target.querySelector('h3').textContent;
+            img.src = target.querySelector('img').src;
         }
-
-        title.innerHTML = target.querySelector('h3').textContent;
-        img.src = target.querySelector('img').src;
     });
 
     function clear(node) {
