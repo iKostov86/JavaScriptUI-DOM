@@ -203,7 +203,7 @@ function createImagesPreviewer(selector, items) {
         }
 
         function hide(i) {
-            titles[i].parentNode.styledisplay = 'none';
+            titles[i].parentNode.style.display = 'none';
         }
 
         function show(i) {
