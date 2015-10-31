@@ -71,10 +71,10 @@ $.fn.gallery = function (col) {
     $previousImage.on('click', changeCurrentImage);
 
     function validateIndex(index) {
-        if (index < 0) {
-            return $imageContainers.length - 1;
-        } else if (index > $imageContainers.length - 1) {
-            return 0;
+        if (index < 1) {
+            return $imageContainers.length;
+        } else if (index > $imageContainers.length) {
+            return 1;
         } return index;
     }
 
