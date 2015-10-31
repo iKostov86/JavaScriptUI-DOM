@@ -9,7 +9,7 @@
 	<div id="authors">
 	</div>
 	<script id="authors-template" type='text/x-handlebars-template'>
-    {{#each authors}}
+    {{#authors}}
   		<div class="box {{#if right}}right{{/if}}">
         <div class="inner">
           <p>
@@ -17,20 +17,20 @@
           </p>
           <div>
             <h3>{{name}}</h3>
-            {{#each titles}}
+            {{#titles}}
               <p>{{{this}}}</p>
-            {{/each}}
+            {{/titles}}
             <ul>
-              {{#each urls}}
+              {{#urls}}
                 <li>
                   <a href="{{this}}" target="_blank">{{this}}</a>
                 </li>
-              {{/each}}
+              {{/urls}}
             </ul>
           </div>
         </div>
       </div>
-    {{/each}}
+    {{/authors}}
 	</script>
 	<script src="handlebars.js"></script>
 	<script src="scripts.js"></script>
