@@ -17,81 +17,78 @@ Create a function that takes an id or DOM element and an array of contents
     * In that case, the content of the element **must not be** changed   
 */
 
-//module.exports = function () {
-//
-//    return function (element, contents) {
-//        if (typeof element === 'undefined') {
-//            throw Error;
-//        } else if (typeof element === 'string') {
-//            element = document.getElementById(element);
-//            if (!element) {
-//                throw Error;
-//            }
-//        } else if (!(element instanceof HTMLElement) && element !== null) {
-//            throw Error;
-//        }
-//
-//        if (typeof contents === 'undefined') {
-//            throw Error;
-//        }
-//
-//        if (contents.some(function (item) {
-//                return typeof item !== 'string' && typeof item !== 'number';
-//            })) {
-//            throw Error;
-//        }
-//
-//        element.innerHTML = '';
-//
-//        var div = document.createElement('div');
-//
-//        for (var i = 0, length = contents.length; i < length; i += 1) {
-//            div = div.cloneNode(true);
-//            div.innerHTML = contents[i];
-//
-//            element.appendChild(div);
-//        }
-//    }
-//};
-
 module.exports = function () {
 
-    return function (element, contents) {
-        var $element,
-            $contents;
+   return function (element, contents) {
+       if (typeof element === 'undefined' || typeof contents === 'undefined') {
+           throw Error;
+       }
+       
+       if (typeof element === 'string') {
+           element = document.getElementById(element);
+       } 
+       
+       if (!(element instanceof HTMLElement)) {
+           throw Error;
+       }
 
-        if (typeof element === 'string') {
-            $element = $('#' + element);
-        } else if (element instanceof HTMLElement) {
-            $element = $(element);
-        } else {
-            throw Error;
-        }
+       if (contents.some(function (item) {
+               return typeof item !== 'string' && typeof item !== 'number';
+           })) {
+           throw Error();
+       }
 
-        if (!$element.length) {
-            throw Error;
-        }
+       element.innerHTML = '';
 
-        if (contents) {
-            $contents = $(contents);
-        } else {
-            throw Error;
-        }
+       var divPattern = document.createElement('div');
 
-        if ($.grep($contents, function (item) {
-                return $.type(item) !== 'string' && $.type(item) !== 'number';
-            }).length > 0) {
-            throw Error;
-        }
-
-        $element.html('');
-
-        var $div  = $('<div>');
-
-        for (var i = 0, length = $contents.length; i < length; i += 1) {
-            $div = $div.clone(true);
-            $div.html($contents[i]);
-            $element.append($div);
-        }
-    }
+       for (var i = 0, len = contents.length; i < len; i += 1) {
+           var div = divPattern.cloneNode(true);
+           
+           div.innerHTML = contents[i];
+           element.appendChild(div);
+       }
+   }
 };
+
+// module.exports = function () {
+
+//     return function (element, contents) {
+//         var $element,
+//             $contents;
+
+//         if (typeof element === 'string') {
+//             $element = $('#' + element);
+//         } else if (element instanceof HTMLElement) {
+//             $element = $(element);
+//         } else {
+//             throw Error;
+//         }
+
+//         if (!$element.length) {
+//             throw Error;
+//         }
+
+//         if (contents) {
+//             $contents = $(contents);
+//         } else {
+//             throw Error;
+//         }
+
+//         if ($.grep($contents, function (item) {
+//                 return $.type(item) !== 'string' && $.type(item) !== 'number';
+//             }).length > 0) {
+//             throw Error;
+//         }
+
+//         $element.html('');
+
+//         var $div  = $('<div>');
+
+//         for (var i = 0, length = $contents.length; i < length; i += 1) {
+//             $div = $div.clone(true);
+//             $div.html($contents[i]);
+//             $element.append($div);
+//         }
+//     }
+// };
